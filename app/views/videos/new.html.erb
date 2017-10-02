@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col">
+    <h1>Add Videos</h1>
+
+    <%= form_with(model: Video.new, local: true) do |form| %>
+      <% if @video.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
+
+          <ul>
+          <% @video.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= form.file_field :clip, id: :video_clip, multiple: true, name: "video[clip]", class: "form-control-file" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <ul id="videos" class="list-group">
+    </ul>
+    <%= link_to 'Continue', library_path, class: "btn btn-primary" %>
+  </div>
+</div>

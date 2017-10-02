@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @video.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @video.description %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @video.duration %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @video.price %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @video.approved %>
+</p>
+
+<p>
+  <strong>Video data:</strong>
+  <%= @video.clip_data %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @video.balance %>
+</p>
+
+<p>
+  <strong>Views:</strong>
+  <%= @video.views %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @video.user %>
+</p>
+
+<%= video_tag @video.clip.url(public: true) %>
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

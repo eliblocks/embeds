@@ -1,0 +1,15 @@
+<h1>Editing Video</h1>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_with(model: @video, local: true) do |form| %>
+
+      <div class="form-group">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Show', @video %> |
+<%= link_to 'Back', videos_path %>

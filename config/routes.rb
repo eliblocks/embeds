@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  mount ClipUploader.upload_endpoint(:cache) => "/clips/upload"
+  mount Shrine.presign_endpoint(:cache) => "/clips/presign"
+
+  root to: 'videos#index'
+  devise_for :users
+  resources :users
+  resources :videos
+
+  get '/library', to: 'users#library'
 end

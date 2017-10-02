@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Duration</th>
+          <th>Date Added</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.videos.order(:created_at).each do |video| %>
+          <tr>
+            <td><%= video.title %></td>
+            <td><%= video.duration %></td>
+            <td><%= video.created_at %></td>
+            <td><%= link_to "Edit", edit_video_path(video) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
