@@ -54,6 +54,9 @@ class PromoteJobWorker
     stored_file = ClipUploader::UploadedFile.new(stored_data)
     attacher.swap(stored_file)
 
+
+      # web: bundle exec puma -C config/puma.rb
+      # worker: bundle exec sidekiq -C config/sidekiq.yml
   end
 end
 
