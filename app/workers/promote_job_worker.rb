@@ -6,7 +6,7 @@ class PromoteJobWorker
     p data
     puts "\n\n\n"
     attacher = Shrine::Attacher.load(data)
-    cached_file = attacher.get #=> #<Shrine::UploadedFile>
+    cached_file = attacher.get # => #<Shrine::UploadedFile>
 
     p cached_file.id
 
