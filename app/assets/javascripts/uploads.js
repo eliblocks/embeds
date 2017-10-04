@@ -37,7 +37,7 @@ $(document).on("turbolinks:load", function() {
 
 
       var clip = {
-        id:       data.formData.key.match(/cache\/(.+)/)[1], // we have to remove the prefix part
+        id:       data.formData.key, // we have to remove the prefix part
         storage:  'cache',
         metadata: {
           size:      data.files[0].size,

@@ -34,10 +34,13 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-elastictranscoder'
 gem 'shrine'
-gem 'roda'
+gem 'sucker_punch'
 gem 'jquery-fileupload-rails'
 gem 'devise'
+gem 'sidekiq'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

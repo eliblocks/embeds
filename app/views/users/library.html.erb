@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <% current_user.videos.order(:created_at).each do |video| %>
+        <% current_user.videos.order(created_at: :desc).each do |video| %>
           <tr>
             <td><%= video.title %></td>
             <td><%= video.duration %></td>

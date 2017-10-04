@@ -15,10 +15,6 @@
   <%= @video.duration %>
 </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @video.price %>
-</p>
 
 <p>
   <strong>Approved:</strong>
@@ -26,8 +22,13 @@
 </p>
 
 <p>
-  <strong>Video data:</strong>
-  <%= @video.clip_data %>
+  <strong>Public:</strong>
+  <%= @video.public %>
+</p>
+
+<p>
+  <strong>Video Size:</strong>
+  <%= number_to_human_size(@video.clip.size) %>
 </p>
 
 <p>
@@ -45,6 +46,6 @@
   <%= @video.user %>
 </p>
 
-<%= video_tag @video.clip.url(public: true) %>
+<%= video_tag @video.clip.url, width: 640, controls: true %>
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

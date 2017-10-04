@@ -1,15 +1,22 @@
 require "shrine/storage/s3"
 
-s3_options = {
+cache_s3_options = {
   access_key_id:     ENV["EMBEDS_AWS_ACCESS_KEY_ID"],
   secret_access_key: ENV["EMBEDS_AWS_SECRET_ACCESS_KEY"],
   region:            "us-west-1",
-  bucket:            "embed-videos",
+  bucket:            "embeds-cache",
+}
+
+store_s3_options = {
+  access_key_id:     ENV["EMBEDS_AWS_ACCESS_KEY_ID"],
+  secret_access_key: ENV["EMBEDS_AWS_SECRET_ACCESS_KEY"],
+  region:            "us-west-1",
+  bucket:            "embeds-store",
 }
 
 Shrine.storages = {
-  cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
-  store: Shrine::Storage::S3.new(prefix: "store", upload_options: {acl:"public-read"},**s3_options)
+  cache: Shrine::Storage::S3.new(**cache_s3_options),
+  store: Shrine::Storage::S3.new(**store_s3_options)
 }
 
 
@@ -17,3 +24,6 @@ Shrine.plugin :activerecord
 Shrine.plugin :presign_endpoint
 Shrine.plugin :upload_endpoint
 Shrine.plugin :restore_cached_data
+Shrine.plugin :backgrounding
+Shrine::Attacher.promote { |data| PromoteJobWorker.perform_async(data) }
+Shrine::Attacher.delete { |data| DeleteJobWorker.perform_async(data) }

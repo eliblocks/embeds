@@ -4,7 +4,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    @videos = Video.includes(:user).order(created_at: :desc)
   end
 
   # GET /videos/1
@@ -41,15 +41,11 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
-    respond_to do |format|
       if @video.update(video_params)
-        format.html { redirect_to @video, notice: 'Video was successfully updated.' }
-        format.json { render :show, status: :ok, location: @video }
+        redirect_to library_path, notice: 'Video was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # DELETE /videos/1
@@ -70,6 +66,7 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:title, :description, :duration, :price, :approved, :clip, :balance, :views, :user_id)
+      params.require(:video).permit(:title, :description, :duration, :price,
+                    :approved, :clip, :balance, :views, :user_id, :public)
     end
 end
