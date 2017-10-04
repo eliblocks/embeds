@@ -1,4 +1,3 @@
-
 $(document).on("turbolinks:load", function() {
 
   $("[type=file]").fileupload({
@@ -73,7 +72,7 @@ $(document).on("turbolinks:load", function() {
     var fileName = data.files[0].name;
     var listItem = $('<li class="list-group-item"></li>');
     listItem.html(fileName);
-    var bar = $(`<div class="progress" style="width: 300px"><div class="progress-bar"></div></div>`);
+    var bar = $('<div class="progress" style="width: 300px"><div class="progress-bar"></div></div>');
     listItem.append(bar);
     $("#videos").append(listItem);
     return bar;
