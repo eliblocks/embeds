@@ -21,8 +21,8 @@ class PromoteJobWorker
                                       key: cached_file.id
                                     },
                                     output: {
-                                      key: "#{cached_file.id}.mp4",
-                                      preset_id: "1351620000001-000001"
+                                      key: "#{cached_file.id}.m3u8",
+                                      preset_id: "1351620000001-200010"
                                       })
 
 
@@ -46,7 +46,7 @@ class PromoteJobWorker
                   "metadata" => {
                                   "size" => job.output.file_size,
                                   "filename" => cached_file.data["metadata"]["filename"],
-                                  "mime_type" => "video/mp4",
+                                  "mime_type" => "application/vnd.apple.mpegurl",
                                   "duration" => job.output.duration
                                   }
                   }

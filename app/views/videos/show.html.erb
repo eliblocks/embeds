@@ -1,51 +1,95 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-10">
+    <p id="notice"><%= notice %></p>
+    <p>
+      <strong>Title:</strong>
+      <%= @video.title %>
+    </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @video.title %>
-</p>
+    <p>
+      <strong>Clip Key:</strong>
+      <%= @video.clip.id %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @video.description %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @video.description %>
+    </p>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @video.duration %>
-</p>
+    <p>
+      <strong>Duration:</strong>
+      <%= @video.duration %>
+    </p>
 
 
-<p>
-  <strong>Approved:</strong>
-  <%= @video.approved %>
-</p>
+    <p>
+      <strong>Approved:</strong>
+      <%= @video.approved %>
+    </p>
 
-<p>
-  <strong>Public:</strong>
-  <%= @video.public %>
-</p>
+    <p>
+      <strong>Public:</strong>
+      <%= @video.public %>
+    </p>
 
-<p>
-  <strong>Video Size:</strong>
-  <%= number_to_human_size(@video.clip.size) %>
-</p>
+    <p>
+      <strong>Video Size:</strong>
+      <%= number_to_human_size(@video.clip.size) %>
+    </p>
 
-<p>
-  <strong>Balance:</strong>
-  <%= @video.balance %>
-</p>
+    <p>
+      <strong>Balance:</strong>
+      <%= @video.balance %>
+    </p>
 
-<p>
-  <strong>Views:</strong>
-  <%= @video.views %>
-</p>
+    <p>
+      <strong>Views:</strong>
+      <%= @video.views %>
+    </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @video.user %>
-</p>
+    <p>
+      <strong>URL:</strong>
+      <%= @video.secret_url %>
+    </p>
 
-<%= video_tag @video.clip.url, width: 640, controls: true %>
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>
+    <p>
+      <strong>URL:</strong>
+      <%= @video.clip.url %>
+    </p>
+
+    <div class="minutes-balance">
+      <span class="balance-span"><%= link_to "Browzable 100", root_path, class: "icon-link" %></span>
+    </div>
+  </div>
+</div>
+
+    <%= content_tag :div, "", id: "browzable-video", data: { url: @video.clip.url } %>
+    <%#= video_tag @video.clip.url, controls: true %>
+    <%#= video_tag @video.secret_url, width: 640, controls: true %>
+    <%= link_to 'Edit', edit_video_path(@video) %> |
+    <%= link_to 'Back', videos_path %>
+
+
+<script type="text/javaScript">
+  var url = document.querySelector("#browzable-video").dataset.url;
+  var playerInstance = jwplayer("browzable-video");
+  playerInstance.setup({
+      file: url
+  });
+
+  var email = $(".minutes-balance");
+
+  jwplayer().on('ready', function() {
+    $(".jw-spacer").addClass("br-spacer")
+    $(".br-spacer").append(email);
+    email.show();
+
+
+  });
+
+  
+
+  
+</script>
+
+

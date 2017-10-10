@@ -19,3 +19,27 @@
 input[type='file'] {
   color: transparent;
 }
+
+.minutes-balance {
+  color: white;
+  display: none;
+}
+
+.jw-spacer {
+  display: flex;
+  align-self: center !important;
+  justify-content: flex-end;
+}
+
+.balance-span {
+  margin-right: 0px;
+}
+
+.icon-link {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}

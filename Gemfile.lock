@@ -44,6 +44,9 @@ GEM
     autoprefixer-rails (7.1.4)
       execjs
     aws-partitions (1.23.0)
+    aws-sdk-cloudfront (1.0.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
     aws-sdk-core (3.6.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -236,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-cloudfront
   aws-sdk-elastictranscoder
   aws-sdk-s3 (~> 1)
   bootstrap (~> 4.0.0.beta)
