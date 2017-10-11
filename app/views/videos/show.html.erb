@@ -47,18 +47,19 @@
       <%= @video.views %>
     </p>
 
-    <p>
+    <!-- <p>
       <strong>URL:</strong>
-      <%= @video.secret_url %>
-    </p>
-
-    <p>
-      <strong>URL:</strong>
-      <%= @video.clip.url %>
-    </p>
+      <%#= @video.secret_url %>
+    </p> -->
+    <% if Rails.env == 'development' %>
+      <p>
+        <strong>URL:</strong>
+        <%= @video.clip.url %>
+      </p>
+    <% end %>
 
     <div class="minutes-balance">
-      <span class="balance-span"><%= link_to "Browzable 100", root_path, class: "icon-link" %></span>
+      <span class="balance-span"><%= link_to @video.user.email, root_path, class: "icon-link" %></span>
     </div>
   </div>
 </div>
@@ -80,8 +81,8 @@
   var email = $(".minutes-balance");
 
   jwplayer().on('ready', function() {
-    $(".jw-spacer").addClass("br-spacer")
-    $(".br-spacer").append(email);
+    $(".jw-spacer").addClass("br-info")
+    $(".br-info").append(email);
     email.show();
 
 

@@ -25,8 +25,8 @@ input[type='file'] {
   display: none;
 }
 
-.jw-spacer {
-  display: flex;
+.br-info {
+  display: flex !important;
   align-self: center !important;
   justify-content: flex-end;
 }
