@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002202858) do
+ActiveRecord::Schema.define(version: 20171010202944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "paypal_email"
+    t.integer "balance", default: 6000
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "plays", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "video_id"
+    t.integer "duration"
+    t.integer "price", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plays_on_user_id"
+    t.index ["video_id"], name: "index_plays_on_video_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,5 +68,8 @@ ActiveRecord::Schema.define(version: 20171002202858) do
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
+  add_foreign_key "accounts", "users"
+  add_foreign_key "plays", "users"
+  add_foreign_key "plays", "videos"
   add_foreign_key "videos", "users"
 end

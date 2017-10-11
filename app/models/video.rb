@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   include ClipUploader[:clip]
   belongs_to :user
+  has_many :plays
 
 
   def secret_url
@@ -30,5 +31,11 @@ class Video < ApplicationRecord
        ]
     }
   end
+
+  def update_views(play)
+    new_views = views + play.duration
+    update(views: new_views)
+  end
+
 
 end
