@@ -17,10 +17,18 @@
 
 @import "bootstrap";
 
-
-body {
+#browzable-video {
   width: 100% !important;
   height: 100% !important;
+}
+
+#embed-body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
 }
 
 input[type='file'] {
@@ -51,8 +59,4 @@ input[type='file'] {
   }
 }
 
-.iframe-wrapper {
-  width: 100% !important;
-  height: 100% !important;
-}
 
