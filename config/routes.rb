@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :videos
+  resources :accounts
+  resources :plays
+  resources :embeds
 
   get '/library', to: 'users#library'
+  get '/account', to: 'accounts#show'
 end

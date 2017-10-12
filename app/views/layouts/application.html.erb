@@ -6,15 +6,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if params[:controller] == "videos" && params[:action] == "show" %>
+    <% if (params[:controller] == "videos" || params[:controller] == "embeds") && params[:action] == "show" %>
       <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
     <% end %>
   </head>
 
   <body>
-    <%= render 'layouts/nav' %>
-    <div class="container">
+    <% unless params[:controller] == "embeds" %> 
+      <%= render 'layouts/nav' %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    <% else %>
       <%= yield %>
-    </div>
+    <% end %>
+
+    
+    
   </body>
 </html>

@@ -1,12 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
   <%= link_to "Browzable", root_path, class: "navbar-brand" %>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <%= link_to(current_user.account.balance/60, 
+              account_path(current_user.account),
+              class: "nav-link") %>
+      <% end %>
       <%= link_to "Upload", new_video_path, class: "nav-link" %>
       <%= link_to "Library", library_path, class: "nav-link" %>
       <% if signed_in? %>

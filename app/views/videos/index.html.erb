@@ -30,7 +30,7 @@
         <td><%= video.balance %></td>
         <td><%= video.views %></td>
         <td><%= video.user %></td>
-        <td><%= link_to 'Show', video %></td>
+        <td><%= link_to 'Show', video, 'data-turbolinks' => 'false' %></td>
         <td><%= link_to 'Edit', edit_video_path(video) %></td>
         <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

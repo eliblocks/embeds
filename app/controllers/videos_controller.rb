@@ -41,11 +41,11 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
-      if @video.update(video_params)
-        redirect_to library_path, notice: 'Video was successfully updated.'
-      else
-        render :edit
-      end
+    if @video.update(video_params)
+      redirect_to library_path, notice: 'Video was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   # DELETE /videos/1
