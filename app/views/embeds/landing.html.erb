@@ -1,0 +1,28 @@
+<div class="text-white embedded-signup container">
+  <%= content_tag(:h5, @video.title, data: { cltag: cl_image_url(@video) }) %>
+  <p>Sign in to browzable to view video</p>
+  <%= form_for(:user, :url => session_path(:user)) do |f| %>
+    <div class="form-group">
+      <%= f.text_field :email, placeholder: "Email", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password, placeholder: "Password", class:"form-control" %>
+    </div>
+    <%= hidden_field_tag :video_id, @video.id %>
+    <%= f.submit 'Sign in', class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+
+
+<script>
+  var body = document.querySelector("body")
+  body.setAttribute("id", "embed-body");
+  var image = document.querySelector("h5").dataset.cltag
+  var imageStyle = "url('" + image + "')";
+  console.log(imageStyle); 
+  body.style.backgroundImage = imageStyle;
+</script>
+<%#= link_to "Sign in with Facebook", 
+      user_facebook_omniauth_authorize_path(video_id: @video_id), 
+      target: "_parent" %>

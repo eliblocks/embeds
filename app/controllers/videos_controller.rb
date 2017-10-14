@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_to_sign_in, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /videos
   # GET /videos.json
@@ -41,7 +42,14 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
-    if @video.update(video_params)
+    params_with_image = video_params
+    if params[:image_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:image_id])
+      raise "Invalid upload signature" if !preloaded.valid?
+      params_with_image.merge!(image: preloaded.identifier)
+    end
+
+    if @video.update(params_with_image)
       redirect_to library_path, notice: 'Video was successfully updated.'
     else
       render :edit
@@ -59,6 +67,12 @@ class VideosController < ApplicationController
   end
 
   private
+
+    def redirect_to_sign_in
+      unless user_signed_in?
+        redirect_to new_user_session_path
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])

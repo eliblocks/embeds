@@ -1,6 +1,6 @@
 $(document).on("turbolinks:load", function() {
 
-  $("[type=file]").fileupload({
+  $(".video-upload").fileupload({
     sequentialUploads: true,
 
     add: function(e, data) {
@@ -77,6 +77,5 @@ $(document).on("turbolinks:load", function() {
     $("#videos").append(listItem);
     return bar;
   }
-
 
 });

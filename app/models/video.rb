@@ -37,5 +37,16 @@ class Video < ApplicationRecord
     update(views: new_views)
   end
 
+  def image_id
+    image.split('/')[1]
+  end
+
+  def image_version
+    image.split('/')[0]
+  end
+
+  def self.cl_base_url
+    "http://res.cloudinary.com/eli/image/upload"
+  end
 
 end

@@ -22,6 +22,16 @@
         <% end %>
       </div>
       <div class="form-group">
+        
+        <%= form.label :image, "Preview Image" %>
+        <div class="preview-image">
+          <% if @video.image %>
+            <%= cl_image_tag(@video.image, width: 200) %>
+          <% end %>
+        </div>
+        <br><%= cl_image_upload_tag(:image_id) %>
+      </div>
+      <div class="form-group">
         <%= form.submit "Update", class: "btn btn-primary" %>
       </div>
     <% end %>
@@ -30,3 +40,46 @@
 
 <%= link_to 'Show', @video %> |
 <%= link_to 'Back', videos_path %>
+
+<%= cloudinary_js_config %>
+<script>
+  $(function() {
+    if($.fn.cloudinary_fileupload !== undefined) {
+      $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload({
+        
+        // add: function(e, data) {
+        //   console.log("add: ", data);
+        //   $(".preview-image").html(data.files[0].name);
+        // }
+
+        // progress: function(e, data) {
+        //   console.log("progress: ", data);
+        // }, 
+
+        // done: function(e, data) {
+        //   console.log("done: ", data);
+        //   $(".preview-image").html("<img src='https://picsum.photos/200'>");
+        // },
+
+        // fail: function(e, data) {
+        //   console.log(data);
+        // }
+      });
+
+      $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) { 
+        console.log(data);
+        $(".preview-image").html(data.files[0].name);
+      });
+
+      $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
+        var id = data.result.public_id;
+        var format = data.result.format;
+        var version = data.result.version;
+        var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
+        $(".preview-image").html("<img src=" + url + ">");
+        console.log(id, format, version, url);
+      });
+
+    }
+  });
+</script>

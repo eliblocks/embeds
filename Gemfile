@@ -41,6 +41,8 @@ gem 'sucker_punch'
 gem 'jquery-fileupload-rails'
 gem 'devise'
 gem 'sidekiq'
+gem 'omniauth-facebook'
+gem 'cloudinary'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

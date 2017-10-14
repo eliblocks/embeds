@@ -15,7 +15,10 @@
         </div>
       <% end %>
       <div class="form-group">
-        <%= form.file_field :clip, id: :video_clip, multiple: true, name: "video[clip]", class: "form-control-file" %>
+        <%= form.file_field :clip, id: :video_clip, 
+            multiple: true, 
+            name: "video[clip]", 
+            class: "form-control-file video-upload" %>
       </div>
     <% end %>
   </div>
