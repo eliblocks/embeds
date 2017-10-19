@@ -1,38 +1,51 @@
-<h1>Editing Video</h1>
-<div class="row">
-  <div class="col-lg-6">
-    <%= form_with(model: @video, local: true) do |form| %>
+<br>
+<h4>Edit Video</h1>
 
-      <div class="form-group">
-        <%= form.label :title %>
-        <%= form.text_field :title, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= form.label :description %>
-        <%= form.text_area :description, class: "form-control" %>
-      </div>
-      <div class="form-check form-check-inline">
-        <%= form.label :public, "show", class: "form-check-label" do %>
-          <%= form.radio_button :public, true, class: "form-check-input" %> Public
-        <% end %>
-      </div>
-      <div class="form-check, form-check-inline">
-        <%= form.label :public, "hide", class: "form-check-label" do %>  
-          <%= form.radio_button :public, false, class: "form-check-input" %> Private
-        <% end %>
-      </div>
-      <div class="form-group">
-        
-        <%= form.label :image, "Preview Image" %>
-        <div class="preview-image">
-          <% if @video.image %>
-            <%= cl_image_tag(@video.image, width: 200) %>
+    
+
+
+    <%= form_with(model: @video, local: true) do |form| %>
+      <div class="form-row">
+        <div class="col-md-5">
+          <%= content_tag :div, "", 
+            class: "browzable-wrapper", 
+            data: { url: @video.clip.url, video_id: @video.id } do %>
+              <div id="browzable-video"></div>
           <% end %>
         </div>
-        <br><%= cl_image_upload_tag(:image_id) %>
+        <div class="form-group col-md-5">
+          <%= form.label :image, "Preview Image" %>
+          <div class="preview-image">
+            <% if @video.image %>
+              <%= cl_image_tag(@video.image, width: 200) %>
+            <% end %>
+          </div>
+          <br><%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
+        </div>
       </div>
-      <div class="form-group">
-        <%= form.submit "Update", class: "btn btn-primary" %>
+      <br>
+      <div class="form-row">
+        <div class="col-md-5">
+          <div class="form-group">
+            <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+          </div>
+          <div class="form-group">
+            <%= form.text_area :description, class: "form-control", placeholder: "Description" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= form.label :public, "show", class: "form-check-label" do %>
+              <%= form.radio_button :public, true, class: "form-check-input" %> Public
+            <% end %>
+          </div>
+          <div class="form-check, form-check-inline">
+            <%= form.label :public, "hide", class: "form-check-label" do %>  
+              <%= form.radio_button :public, false, class: "form-check-input" %> Private
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= form.submit "Update", class: "btn btn-primary" %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
@@ -42,7 +55,28 @@
 <%= link_to 'Back', videos_path %>
 
 <%= cloudinary_js_config %>
+
 <script>
+
+  //Show Video
+  var wrapper = document.querySelector(".browzable-wrapper");
+  var url = wrapper.dataset.url;
+  var videoId = wrapper.dataset.videoId;
+  var playerInstance = jwplayer("browzable-video");
+  var balance = $(".minutes-balance");
+  var playDuration = 10;
+
+  playerInstance.setup({
+      file: url
+  });
+
+  jwplayer().on('ready', function() {
+    $(".jw-spacer").addClass("br-info")
+    $(".br-info").append(balance);
+    email.show();
+  });
+
+  // Preview Upload
   $(function() {
     if($.fn.cloudinary_fileupload !== undefined) {
       $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload({

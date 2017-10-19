@@ -81,7 +81,7 @@
   var url = wrapper.dataset.url;
   var videoId = wrapper.dataset.videoId;
   var playerInstance = jwplayer("browzable-video");
-  var email = $(".minutes-balance");
+  var balance = $(".minutes-balance");
   var playDuration = 10;
 
   playerInstance.setup({
@@ -92,8 +92,8 @@
 
   jwplayer().on('ready', function() {
     $(".jw-spacer").addClass("br-info")
-    $(".br-info").append(email);
-    email.show();
+    $(".br-info").append(balance);
+    balance.show();
   });
 
   //inaccurate timekeeping

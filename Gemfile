@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap', '~> 4.0.0.beta'
+gem "font-awesome-rails"
 gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-elastictranscoder'
 gem 'aws-sdk-cloudfront'

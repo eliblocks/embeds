@@ -5,9 +5,16 @@ $(document).on("turbolinks:load", function() {
 
     add: function(e, data) {
       console.log("add", data);
+
+    
+      getFileDuration(data)
+
+   
+
       data.progressBar = buildFileRow(data);
       console.log(data.progressBar);
 
+      
       
       var options      = {
         extension: data.files[0].name.match(/(\.\w+)?$/)[0], // set the file extension
@@ -31,8 +38,10 @@ $(document).on("turbolinks:load", function() {
     },
 
     done: function(e, data) {
+
       console.log("done", data);
       // data.progressBar.remove();
+ 
 
 
       var clip = {
@@ -41,7 +50,8 @@ $(document).on("turbolinks:load", function() {
         metadata: {
           size:      data.files[0].size,
           filename:  data.files[0].name.match(/[^\/\\]+$/)[0], // IE return full path
-          mime_type: data.files[0].type
+          mime_type: data.files[0].type,
+          duration:  data.files[0].duration
         }
       };
 
@@ -76,6 +86,17 @@ $(document).on("turbolinks:load", function() {
     listItem.append(bar);
     $("#videos").append(listItem);
     return bar;
+  }
+
+  function getFileDuration(data) {
+    var video = document.createElement('video');
+    video.preload = 'metadata';
+    video.onloadedmetadata = function() {
+      // window.URL.revokeObjectURL(this.src) - causing 404, omitting might cause issues.
+      data.files[0].duration = video.duration;
+
+    }
+    video.src = URL.createObjectURL(data.files[0]);
   }
 
 });

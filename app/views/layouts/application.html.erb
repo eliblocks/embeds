@@ -6,7 +6,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if (params[:controller] == "videos" || params[:controller] == "embeds") && params[:action] == "show" %>
+    <% if ((params[:controller] == "videos" || params[:controller] == "embeds") && 
+        (params[:action] == "show" || params[:action] == "edit")) %>
       <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
     <% end %>
   </head>
@@ -21,7 +22,5 @@
       <%= yield %>
     <% end %>
 
-    
-    
   </body>
 </html>

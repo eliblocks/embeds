@@ -16,6 +16,63 @@
 
 
 @import "bootstrap";
+@import "font-awesome";
+
+.br-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 1em;
+  
+  // clickable card
+  span {
+    position:absolute; 
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+    z-index: 1;
+  }
+}
+
+.user-link {
+  position: relative;
+  z-index: 10
+}
+
+.br-card-link {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.br-card-title {
+  color: black;
+  font-size: 1.2em;
+  font-weight: 500;
+  &:hover {
+    color: black;
+  }
+}
+
+.br-card-subtitle {
+  font-weight: 400;
+
+}
+
+.br-card-body {
+  padding-top: 0.75em;
+
+}
+
+.btn-square {
+  border-radius: 0;
+}
+
+.input-square {
+  border-radius: 0;
+}
 
 #browzable-video {
   width: 100% !important;
@@ -63,5 +120,45 @@ input[type='file'] {
   height: 100%;
   width: 100%;
 }
+
+.landing-bg {
+  background: url("jw_black.png");
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+.signup-header {
+  text-align: center;
+}
+
+.browzable-brand {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.br-icon {
+  color: black;
+  font-size: 1.2em;
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+  margin-right: 2px;
+}
+
+.br-balance {
+  color: black;
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
+
+
+
+
 
 

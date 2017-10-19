@@ -49,4 +49,25 @@ class Video < ApplicationRecord
     "http://res.cloudinary.com/eli/image/upload"
   end
 
+  def image_url
+    "#{Video.cl_base_url}/#{image_id}"
+  end
+
+  def duration
+    return 0 unless clip.metadata['duration']
+    clip.metadata['duration'].round
+  end
+
+  def minutes
+    views/60
+  end
+
+  def preview
+    if image
+      image_url
+    else
+      "jw_black.png"
+    end
+  end
+
 end
