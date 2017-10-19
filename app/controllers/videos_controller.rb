@@ -27,6 +27,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     @video.user = current_user
+    @video.image = Rails.configuration.default_image
 
     respond_to do |format|
       if @video.save

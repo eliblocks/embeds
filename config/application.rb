@@ -15,6 +15,8 @@ module Embeds
       'X-Frame-Options' => 'ALLOWALL'
     }
 
+    config.default_image = "v1507935825/skgchx7hxw1huoodm8y5.jpg"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
