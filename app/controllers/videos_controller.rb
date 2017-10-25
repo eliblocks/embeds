@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_to_sign_in, only: [:new, :edit, :update, :destroy]
+  before_action :redirect_to_sign_in, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /videos
   # GET /videos.json

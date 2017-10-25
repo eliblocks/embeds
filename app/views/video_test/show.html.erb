@@ -1,0 +1,25 @@
+<p>Title: <%= @video.title %></p>
+<p>Created: <%= @video.created_at %></p>
+<p>Uploader: <%= @video.user.full_name %></p>
+<p>S3 URL: <%= @video.clip.url %></p>
+
+<%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.clip.url, video_id: @video.id } do %>
+  <div id="browzable-video"></div>
+<% end %>
+
+
+<script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
+<script type="text/javaScript">
+  
+  var wrapper = document.querySelector(".browzable-wrapper");
+  var url = wrapper.dataset.url;
+  var videoId = wrapper.dataset.videoId;
+  var playerInstance = jwplayer("browzable-video");
+  var balance = $(".minutes-balance");
+  var playDuration = 10;
+
+  playerInstance.setup({
+      file: url
+  });
+
+</script>
