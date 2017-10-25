@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users
   resources :videos
-  resources :accounts
   resources :plays
   resources :embeds
 
+  patch '/accounts', to: 'accounts#update'
+  get 'accounts/edit', to: 'accounts#edit'
+  get 'accounts/show', to: 'accounts#show'
   get '/library', to: 'users#library'
   get '/account', to: 'accounts#show'
   get '/landing', to: 'embeds#landing'

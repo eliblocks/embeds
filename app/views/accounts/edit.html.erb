@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-6 m-auto">
+
+    <h1><%= current_user.full_name %></h1>
+    <%= form_with scope: :account, url: "/accounts", method: :patch do |form| %>
+
+      <%= cl_image_tag(@account.image, 
+                        width: 200, 
+                        height: 200, 
+                        crop: "fill",
+                        gravity: "auto",
+                        class: "user-image") %>
+
+      <br><br>
+      <span>Change profile photo</span>
+      <br>
+      <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
+      <br><br>
+      <div class="form-group">
+        <%= form.submit "Update", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<script>
+  $(function() {
+    if($.fn.cloudinary_fileupload !== undefined) {
+
+      $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload({
+      });
+
+      $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) { 
+        console.log(data);
+    
+      });
+
+      $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
+        var id = data.result.public_id;
+        var format = data.result.format;
+        var version = data.result.version;
+        var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
+        $(".user-image").attr("src", url);
+        console.log(id, format, version, url);
+      });
+    }
+  });
+</script>

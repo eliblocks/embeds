@@ -1,78 +1,39 @@
 <div class="row">
-  <div class="col-lg-10">
+  <div class="col-lg-10 m-auto">
     <p id="notice"><%= notice %></p>
-    <p>
-      <strong>Title:</strong>
-      <%= @video.title %>
-    </p>
-
-    <p>
-      <strong>Clip Key:</strong>
-      <%= @video.clip.id %>
-    </p>
-
-    <p>
-      <strong>Description:</strong>
-      <%= @video.description %>
-    </p>
-
-    <p>
-      <strong>Duration:</strong>
-      <%= @video.duration %>
-    </p>
-
-
-    <p>
-      <strong>Approved:</strong>
-      <%= @video.approved %>
-    </p>
-
-    <p>
-      <strong>Public:</strong>
-      <%= @video.public %>
-    </p>
-
-    <p>
-      <strong>Video Size:</strong>
-      <%= number_to_human_size(@video.clip.size) %>
-    </p>
-
-    <p>
-      <strong>Balance:</strong>
-      <%= @video.balance %>
-    </p>
-
-    <p>
-      <strong>Views:</strong>
-      <%= @video.views %>
-    </p>
+    
 
     <!-- <p>
       <strong>URL:</strong>
       <%#= @video.secret_url %>
     </p> -->
-    <% if Rails.env == 'development' %>
-      <p>
-        <strong>URL:</strong>
-        <%= @video.clip.url %>
-      </p>
-    <% end %>
 
     <div class="minutes-balance">
       <span class="balance-span">Browzable <%= link_to number_to_human(current_user.account.balance / 60), 
         root_path, class: "icon-link" %></span>
     </div>
+    <%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.clip.url, video_id: @video.id } do %>
+      <div id="browzable-video"></div>
+    <% end %>
+    <div class="video-info-container">
+        <h4><%= @video.title %></h4>
+        <span><%= @video.minutes %> Views</span> | <span><%= time_ago_in_words(@video.created_at) %></span>
+        <hr>
+      <div class="user-info">
+        <%= link_to @video.user.full_name, user_path(@video.user), class: "uploader-link" %>
+      </div>
+      
+    </div>
+    <%= link_to 'Edit', edit_video_path(@video) %> |
+    <%= link_to 'Back', videos_path %>
   </div>
 </div>
 
-<%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.clip.url, video_id: @video.id } do %>
-  <div id="browzable-video"></div>
-<% end %>
+
 
 <%#= video_tag @video.clip.url, controls: true %>
 <%#= video_tag @video.secret_url, width: 640, controls: true %>
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>
+
 
 
 <script type="text/javaScript">

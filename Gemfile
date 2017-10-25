@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap', '~> 4.0.0.beta'
 gem "font-awesome-rails"
+gem 'kaminari'
 gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-elastictranscoder'
 gem 'aws-sdk-cloudfront'

@@ -8,7 +8,7 @@
           <%= cl_image_tag(video.image, :client_hints=>true, :transformation=>[
           {:aspect_ratio=>"16:9", :gravity=>"auto", :crop=>"fill"},
           {:width=>"auto", :quality=>"auto", :fetch_format=>:auto, :crop=>"scale"}
-          ], class: "card-img-top") %>
+          ]) %>
         <% end %>
         <div class="br-card-body">
           <div class="mb-2">
@@ -29,6 +29,12 @@
     </div>
   <% end %>
 </div>
+<div class="row">
+  <div class="col-md-6 ml-auto">
+    <%= paginate @videos %>
+  </div>
+</div>
+
 
 
   

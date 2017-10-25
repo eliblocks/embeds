@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
 
   def create_account
-    account = Account.new(user_id: id)
+    account = Account.new(user_id: id, image: Rails.configuration.default_profile_image)
     if account.save
       print "Account created!!"
     else
