@@ -1,0 +1,27 @@
+<script src="https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js"></script>
+<div id="dropin-container"></div>
+  <%= form_with model: Charge.new, id: "charge-form", local: true do |form| %>
+    <%= hidden_field_tag 'nonce' %>
+    <button type="button" id="submit-button" class="btn btn-primary">Pay $10</button>
+  <% end %>
+
+
+<script>
+  var button = document.querySelector('#submit-button');
+
+  braintree.dropin.create({
+    authorization: "<%= @client_token %>",
+    container: '#dropin-container'
+  }, function (createErr, instance) {
+    button.addEventListener('click', function () {
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log(err);
+        } else {
+          $("input[name='nonce']").val(payload.nonce);
+          $("#charge-form").submit();
+        }
+      });
+    });
+  });
+</script>

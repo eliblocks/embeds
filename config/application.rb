@@ -17,6 +17,8 @@ module Embeds
 
     config.default_image = "v1507935825/skgchx7hxw1huoodm8y5.jpg"
     config.default_profile_image = "v1508457686/default_profile_gmtwcg.png"
+    config.rate = 6000
+    config.commission = 0.30
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

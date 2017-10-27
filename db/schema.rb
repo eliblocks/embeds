@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019235401) do
+ActiveRecord::Schema.define(version: 20171026222341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(version: 20171019235401) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.string "gateway_charge_id"
+    t.integer "amount"
+    t.integer "amount_refunded"
+    t.string "balance_transaction"
+    t.boolean "captured"
+    t.integer "created"
+    t.string "currency"
+    t.string "description"
+    t.boolean "success"
+    t.bigint "user_id"
+    t.integer "seconds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
   create_table "plays", force: :cascade do |t|
@@ -52,6 +69,7 @@ ActiveRecord::Schema.define(version: 20171019235401) do
     t.string "provider"
     t.string "uid"
     t.string "full_name"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -70,10 +88,12 @@ ActiveRecord::Schema.define(version: 20171019235401) do
     t.datetime "updated_at", null: false
     t.boolean "public", default: false
     t.string "image"
+    t.boolean "removed", default: false
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "charges", "users"
   add_foreign_key "plays", "users"
   add_foreign_key "plays", "videos"
   add_foreign_key "videos", "users"

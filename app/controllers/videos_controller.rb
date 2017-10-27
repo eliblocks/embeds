@@ -1,16 +1,23 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :update, :destroy, :remove, :restore]
   before_action :redirect_to_sign_in, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
+    @videos = Video.where.not(removed: true)
+    .includes(:user)
+    .order(created_at: :desc)
+    .page(params[:page])
+    .per(10)
   end
 
   # GET /videos/1
   # GET /videos/1.json
   def show
+    if @video.removed
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # GET /videos/new
@@ -31,11 +38,10 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.save
-        format.html { redirect_to @video, notice: 'Video was successfully created.' }
-        format.json { render :show, status: :created, location: @video }
+        flash[:success] = "Video successfully created"
+        redirect_to @video
       else
-        format.html { render :new }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -51,7 +57,8 @@ class VideosController < ApplicationController
     end
 
     if @video.update(params_with_image)
-      redirect_to library_path, notice: 'Video was successfully updated.'
+      flash[:success] = "Video successfully updated"
+      redirect_to library_path
     else
       render :edit
     end
@@ -64,6 +71,24 @@ class VideosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def remove
+    if @video.update(removed: true)
+      flash[:success] = "Video successfully removed"
+      redirect_to library_path
+    else
+      render 'edit'
+    end
+  end
+
+  def restore
+    if @video.update(removed: false)
+      flash[:success] = "Video successfully restored"
+      redirect_to library_path
+    else
+      render 'edit'
     end
   end
 

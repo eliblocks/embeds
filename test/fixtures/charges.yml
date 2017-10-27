@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gateway_charge_id: MyString
+  amount: 1
+  amount_refunded: 1
+  balance_transaction: MyString
+  captured: false
+  created: 1
+  currency: MyString
+  description: MyString
+  success: false
+  user: one
+  seconds: 1
+
+two:
+  gateway_charge_id: MyString
+  amount: 1
+  amount_refunded: 1
+  balance_transaction: MyString
+  captured: false
+  created: 1
+  currency: MyString
+  description: MyString
+  success: false
+  user: two
+  seconds: 1

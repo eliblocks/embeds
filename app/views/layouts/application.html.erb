@@ -10,12 +10,17 @@
         (params[:action] == "show" || params[:action] == "edit")) %>
       <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
     <% end %>
+    <script src="https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js"></script>
+    <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
   </head>
 
   <body>
     <% unless params[:controller] == "embeds" %> 
       <%= render 'layouts/nav' %>
       <div class="container">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
         <%= yield %>
       </div>
     <% else %>

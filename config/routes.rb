@@ -6,12 +6,16 @@ Rails.application.routes.draw do
   root to: 'videos#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users
-  resources :videos
+  resources :charges
+
+  resources :videos do
+    member do
+      patch 'remove'
+      patch 'restore'
+    end
+  end
   resources :plays
   resources :embeds
-
-
-
 
   patch '/accounts', to: 'accounts#update'
   get 'accounts/edit', to: 'accounts#edit'
@@ -20,4 +24,12 @@ Rails.application.routes.draw do
   get '/account', to: 'accounts#show'
   get '/landing', to: 'embeds#landing'
   get 'video_test/:id', to: 'video_test#show'
+
+
+  namespace :admin do
+    get '', to: 'dashboard#index', as: '/'
+    resources :users
+    resources :videos
+    get 'sessions/:id', to: 'sessions#impersonate', as: "impersonate"
+  end
 end

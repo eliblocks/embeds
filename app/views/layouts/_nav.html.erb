@@ -25,6 +25,9 @@
         <li class="nav-item">
           <%= link_to "Library", library_path, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Buy Minutes", new_charge_path, class: "nav-link" %>
+        </li>
       </ul>
       <div class="navbar-nav ml-auto">
      
@@ -34,15 +37,18 @@
             <%= fa_icon "search" %>
           </button>
         </form>
-        <div class="dropdown ml-2">
-          <button class="btn btn-secondary btn-square dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </div>
+      <ul class="navbar-nav">
+        <%#= link_to "Buy minutes", new_charge_path, class: "btn btn-secondary btn-square my-2 my-lg-0" %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="buttton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Account
-          </button>
+          </a>
           <div class="dropdown-menu dropdown-menu-right nav-item" aria-labelledby="dropdownMenuButton">
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             <%= link_to "Edit Profile", '/accounts/edit', class: "dropdown-item" %>
             <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
-            <%#= link_to "Edit Profile", edit_account_path %>
             
           </div>
         </div>

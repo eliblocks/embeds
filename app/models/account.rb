@@ -23,5 +23,10 @@ class Account < ApplicationRecord
     "#{Video.cl_base_url}/#{image_id}"
   end
 
+  def add_balance(seconds)
+    new_balance = balance + seconds
+    update(balance: new_balance)
+  end
+
 
 end

@@ -1,8 +1,11 @@
 class EmbedsController < ApplicationController
-
-
   def show
     @video = Video.find(params[:id])
+
+    if @video.removed
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     unless user_signed_in?
       redirect_to landing_path(video_id: @video.id)
     end

@@ -18,6 +18,22 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.alert-notice {
+  @extend .alert-info;
+}
+
+#error_explanation {
+  h2 {
+    @extend h4;
+    @extend .alert;
+    @extend .alert-danger;
+  }
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
 .uploader-link {
   color: black;
   font-weight: bold;
@@ -26,6 +42,10 @@
     color: black;
     text-decoration: none;
   }
+}
+
+#navbarDropdown {
+  cursor: pointer;
 }
 
 

@@ -45,10 +45,12 @@
     </div>
   </div>
 <% end %>
-
-
-<%= link_to 'Show', @video %> |
-<%= link_to 'Back', videos_path %>
+<hr>
+<% if !@video.removed %>
+  <%= link_to "Remove Video", remove_video_path(@video), method: :patch, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "Restore", restore_video_path, method: :patch, class: "btn btn-success" %>
+<% end %>
 
 <%= cloudinary_js_config %>
 

@@ -45,6 +45,7 @@ gem 'devise'
 gem 'sidekiq'
 gem 'omniauth-facebook'
 gem 'cloudinary'
+gem 'braintree'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
