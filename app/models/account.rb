@@ -28,5 +28,14 @@ class Account < ApplicationRecord
     update(balance: new_balance)
   end
 
+  def receivable
+    #stub value
+    if balance > 1000
+      balance - 1000
+    else
+      0
+    end
+  end
+
 
 end

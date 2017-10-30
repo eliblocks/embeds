@@ -15,7 +15,7 @@
             <td><%= video.title %></td>
             <td><%= youtube_time(video.duration) %></td>
             <td><%= video.created_at.to_formatted_s(:db) %></td>
-            <td><%= link_to "Edit", edit_video_path(video) %></td>
+            <td><%= link_to "Edit", edit_video_path(video)%></td>
           </tr>
         <% end %>
       </tbody>

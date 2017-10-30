@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :plays
   resources :embeds
 
+  get 'about', to: 'static#about'
+
   patch '/accounts', to: 'accounts#update'
   get 'accounts/edit', to: 'accounts#edit'
   get 'accounts/show', to: 'accounts#show'

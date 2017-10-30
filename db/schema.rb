@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026222341) do
+ActiveRecord::Schema.define(version: 20171027221359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20171026222341) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.string "paypal_id"
+    t.integer "amount"
+    t.integer "seconds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "charges", force: :cascade do |t|
@@ -40,6 +48,18 @@ ActiveRecord::Schema.define(version: 20171026222341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_charges_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "seconds"
+    t.string "currency"
+    t.bigint "user_id"
+    t.bigint "batch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_payments_on_batch_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "plays", force: :cascade do |t|
@@ -94,6 +114,8 @@ ActiveRecord::Schema.define(version: 20171026222341) do
 
   add_foreign_key "accounts", "users"
   add_foreign_key "charges", "users"
+  add_foreign_key "payments", "batches"
+  add_foreign_key "payments", "users"
   add_foreign_key "plays", "users"
   add_foreign_key "plays", "videos"
   add_foreign_key "videos", "users"

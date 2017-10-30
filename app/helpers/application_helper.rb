@@ -19,4 +19,9 @@ module ApplicationHelper
     str = ( hours > 0 ? "#{hours}:#{minutes.to_s.rjust(2,'0')}:" : "#{minutes}:" ) + seconds.to_s.rjust(2,'0')
     return str
   end
+
+  def nav_link(text, path)
+    current_page?(path) ? active_status = 'active' : active_status = ''
+    link_to(text, path, class: "nav-link #{active_status}")
+  end
 end

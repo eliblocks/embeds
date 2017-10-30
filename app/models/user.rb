@@ -5,15 +5,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :videos, dependent: :destroy
   has_many :plays
-  #connect charges to users for now
   has_many :charges
+  has_many :payments
   has_one :account, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]
-
-
-
 
 
 
@@ -38,6 +35,8 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+
 
 
 end

@@ -46,7 +46,7 @@ gem 'sidekiq'
 gem 'omniauth-facebook'
 gem 'cloudinary'
 gem 'braintree'
-
+gem 'paypal-sdk-rest'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
