@@ -1,1 +1,57 @@
-<%= @user.full_name %>
+<br><br>
+<div class="row">
+  <div class="edit-profile col-md-4">
+    <% if @user == current_user %>
+      
+        <%= link_to "Edit Profile", accounts_edit_path %>
+      
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+
+      <%= cl_image_tag @user.account.image, client_hints: true, transformation: [ 
+                        { gravity: "auto", crop: "fill" },
+                        { width: "auto", quality: "auto", fetch_format: "auto", crop: "scale" }], 
+                        class: "card-img-top" %>
+ 
+      <div class="card-body">
+        <h4 class="card-title"><%= @user.full_name %></h4>
+        <span><%= @user.videos.count %> Videos</span> | 
+        <span><%= @user.account.balance %> Minutes</span>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <% @user.videos.each do |video| %>
+    <div class="col-md-4">
+      <div class="br-card">
+        <%= link_to video_path(video), class: "br-card-link" do %>
+          <%= cl_image_tag(video.image, :client_hints=>true, :transformation=>[
+          {:aspect_ratio=>"16:9", :gravity=>"auto", :crop=>"fill"},
+          {:width=>"auto", :quality=>"auto", :fetch_format=>:auto, :crop=>"scale"}
+          ]) %>
+        <% end %>
+        <div class="br-card-body">
+          <div class="mb-2">
+            <%= link_to video_path(video), class: "br-card-link br-card-title" do %>
+              <%= video.title %>
+              <!-- make div clickable -->
+              <span></span>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to video.user.full_name, user_path(video.user), class: "br-card-link fuck text-secondary user-link" %>
+          </div>
+          <div>
+            <%= link_to "#{video.minutes} Views", video_path(video), class: "br-card-link text-secondary" %> 
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

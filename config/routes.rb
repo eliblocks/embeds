@@ -18,13 +18,16 @@ Rails.application.routes.draw do
   resources :embeds
 
   get 'about', to: 'static#about'
+  get 'contact', to: 'static#contact'
+  get 'privacy', to: 'static#privacy'
+  get 'terms', to: 'static#terms'
 
-  patch '/accounts', to: 'accounts#update'
+  patch 'accounts', to: 'accounts#update'
   get 'accounts/edit', to: 'accounts#edit'
   get 'accounts/show', to: 'accounts#show'
-  get '/library', to: 'users#library'
-  get '/account', to: 'accounts#show'
-  get '/landing', to: 'embeds#landing'
+  get 'library', to: 'users#library'
+  get 'account', to: 'accounts#show'
+  get 'landing', to: 'embeds#landing'
   get 'video_test/:id', to: 'video_test#show'
 
 

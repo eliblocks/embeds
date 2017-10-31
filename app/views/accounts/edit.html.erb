@@ -1,29 +1,39 @@
+<br><br>
 <div class="row">
-  <div class="col-md-6 m-auto">
+  <% if @user = current_user %>
 
-    <h1><%= current_user.full_name %></h1>
-    <%= form_with scope: :account, url: "/accounts", method: :patch do |form| %>
+    <div class="edit-profile col-md-4">
+      <%= link_to "Edit Profile", accounts_edit_path %>
+    </div>
+  <% end %>
+  <div class="col-md-4">
+    <div class="card">
 
-      <%= cl_image_tag(@account.image, 
-                        width: 200, 
-                        height: 200, 
-                        crop: "fill",
-                        gravity: "auto",
-                        class: "user-image") %>
+      <%= cl_image_tag @user.account.image, client_hints: true, transformation: [ 
+                        { gravity: "auto", crop: "fill" },
+                        { width: "auto", quality: "auto", fetch_format: "auto", crop: "scale" }], 
+                        class: "card-img-top" %>
+ 
+      <div class="card-body">
+        <h4 class="card-title"><%= @account.user.full_name %></h4>
+        <span><%= @user.videos.count %> Videos</span> | 
+        <span><%= @user.account.balance %> Minutes</span>
 
-      <br><br>
-      <span>Change profile photo</span>
-      <br>
-      <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
-      <br><br>
-      <div class="form-group">
-        <%= form.submit "Update", class: "btn btn-primary" %>
       </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-4 m-auto">
+    <%= form_with scope: :account, url: "/accounts", method: :patch do |form| %>
+      <%= form.hidden_field :full_name, id: "full-name", value: @account.user.full_name %>
+      <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
+        <br><br>
+        <%= form.submit "Update", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
-
-
 
 <script>
   $(function() {
@@ -34,7 +44,7 @@
 
       $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) { 
         console.log(data);
-    
+        $(".card-img-top").attr("src", "/assets/loading.png");
       });
 
       $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
@@ -42,7 +52,7 @@
         var format = data.result.format;
         var version = data.result.version;
         var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
-        $(".user-image").attr("src", url);
+        $(".card-img-top").attr("src", url);
         console.log(id, format, version, url);
       });
     }

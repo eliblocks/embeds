@@ -8,10 +8,12 @@ class AccountsController < ApplicationController
 
   def update
     @account = current_user.account
-
     print account_params
     if @account.update(account_params)
-      redirect_to account_path, notice: "Profile Updated"
+      flash[:success] = "Profile Successfully Updated"
+      redirect_to user_path(@account.user)
+    else
+      render 'edit'
     end
   end
 

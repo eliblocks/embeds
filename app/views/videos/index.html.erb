@@ -2,7 +2,6 @@
 <div class="row">
   <% @videos.each do |video| %>
     <div class="col-md-4">
-      
       <div class="br-card">
         <%= link_to video_path(video), class: "br-card-link" do %>
           <%= cl_image_tag(video.image, :client_hints=>true, :transformation=>[

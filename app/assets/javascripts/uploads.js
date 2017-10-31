@@ -40,6 +40,7 @@ $(document).on("turbolinks:load", function() {
     done: function(e, data) {
 
       console.log("done", data);
+      $("#continue").show(); 
       // data.progressBar.remove();
  
 

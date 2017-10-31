@@ -1,9 +1,14 @@
 <script src="https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js"></script>
-<div id="dropin-container"></div>
-  <%= form_with model: Charge.new, id: "charge-form", local: true do |form| %>
-    <%= hidden_field_tag 'nonce' %>
-    <button type="button" id="submit-button" class="btn btn-primary">Pay $10</button>
-  <% end %>
+<div class="row">
+  <div class="col-md-6 m-auto">
+    <div id="dropin-container"></div>
+    <%= form_with model: Charge.new, id: "charge-form", local: true do |form| %>
+      <%= hidden_field_tag 'nonce' %>
+      <button type="button" id="submit-button" class="btn btn-primary">Pay $10</button>
+    <% end %>
+  </div>
+</div>
+
 
 
 <script>
