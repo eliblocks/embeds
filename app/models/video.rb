@@ -17,6 +17,11 @@ class Video < ApplicationRecord
     "https://#{domain_id}.cloudfront.net/#{clip.id}"
   end
 
+  #error on non mp4 ending
+  def fastly_url
+    "https://www.aboutica.com/#{clip.id[0..-5]}.m3u8"
+  end
+
   def policy
     {
        "Statement" => [

@@ -12,7 +12,7 @@
       <span class="balance-span">Browzable <%= link_to number_to_human(current_user.account.balance / 60), 
         root_path, class: "icon-link" %></span>
     </div>
-    <%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.clip.url, video_id: @video.id } do %>
+    <%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.fastly_url, video_id: @video.id } do %>
       <div id="browzable-video"></div>
     <% end %>
     <div class="video-info-container">
