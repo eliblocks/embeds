@@ -4,7 +4,7 @@ class Video < ApplicationRecord
   has_many :plays
 
 
-  def secret_url
+  def signed_cloudfront_url
     signer = Aws::CloudFront::UrlSigner.new(
       key_pair_id: ENV["CLOUDFRONT_KEY_ID"],
       private_key: ENV["CLOUDFRONT_PRIVATE_KEY"]
@@ -19,7 +19,15 @@ class Video < ApplicationRecord
 
   #error on non mp4 ending
   def fastly_url
-    "https://www.aboutica.com/#{clip.id[0..-5]}.m3u8"
+    "https://browzable.global.ssl.fastly.net/#{clip.id[0..-5]}.m3u8"
+  end
+
+  def cdn_url
+    if ENV['CDN_USED'] == 'fastly'
+      fastly_url
+    else
+      signed_cloudfront_url
+    end
   end
 
   def policy

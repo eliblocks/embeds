@@ -31,6 +31,21 @@ body {
   margin-bottom: 60px;
 }
 
+.embed-code-container {
+  padding: 15px;
+}
+
+.share-link {
+  float: right;
+}
+
+.library-table tbody {
+  cursor: pointer;
+}
+.library-table tbody tr:hover { 
+  @extend .bg-light;
+}
+
 
 .video-time {
   position: absolute;

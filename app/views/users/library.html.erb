@@ -1,21 +1,19 @@
 <div class="row">
   <div class="col">
-    <table class="table">
+    <table class="table library-table">
       <thead>
         <tr>
           <th>Title</th>
           <th>Duration</th>
           <th>Date Added</th>
-          <th>Link</th>
         </tr>
       </thead>
       <tbody>
         <% current_user.videos.order(created_at: :desc).each do |video| %>
-          <tr>
+          <tr onclick="window.location = '<%= edit_video_path(video) %>' ">
             <td><%= video.title %></td>
             <td><%= youtube_time(video.duration) %></td>
             <td><%= video.created_at.to_formatted_s(:db) %></td>
-            <td><%= link_to "Edit", edit_video_path(video)%></td>
           </tr>
         <% end %>
       </tbody>
