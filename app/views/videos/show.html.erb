@@ -59,13 +59,16 @@
   
   var wrapper = document.querySelector(".browzable-wrapper");
   var url = wrapper.dataset.url;
+  console.log(url);
   var videoId = wrapper.dataset.videoId;
   var playerInstance = jwplayer("browzable-video");
   var balance = $(".minutes-balance");
   var playDuration = 10;
 
   playerInstance.setup({
-      file: url
+      autostart: "true",
+      file: url,
+      image: "<%= @video.image_url %>"
   });
 
   // Embed JWplayer

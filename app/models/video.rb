@@ -25,7 +25,7 @@ class Video < ApplicationRecord
   def cdn_url
     if ENV['CDN_USED'] == 'fastly'
       fastly_url
-    else
+    elsif ENV['CDN_USED'] == 'cloudfront'
       signed_cloudfront_url
     end
   end
@@ -81,6 +81,10 @@ class Video < ApplicationRecord
     else
       "jw_black.png"
     end
+  end
+
+  def removable?
+    !plays.any?
   end
 
 end

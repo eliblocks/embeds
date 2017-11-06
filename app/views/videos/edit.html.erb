@@ -10,9 +10,9 @@
     </div>
     <div class="form-group col-md-5">
       
-      <div class="preview-image">
+      <div>
         <% if @video.image %>
-          <%= cl_image_tag(@video.image, width: 200) %>
+          <%= cl_image_tag(@video.image, width: 200, class: "preview-image") %>
         <% end %>
         <div>
           <%= form.label :image, "Preview Image" %>
@@ -53,10 +53,15 @@
   </div>
 <% end %>
 <hr>
-<% if !@video.removed %>
-  <%= link_to "Remove Video", remove_video_path(@video), method: :patch, class: "btn btn-danger" %>
+
+<% if @video.removable? %>
+  <%= link_to "Delete Video", video_path(@video), method: :delete, class: "btn btn-danger" %>
 <% else %>
-  <%= link_to "Restore", restore_video_path, method: :patch, class: "btn btn-success" %>
+  <% if !@video.removed %>
+    <%= link_to "Remove Video", remove_video_path(@video), method: :patch, class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "Restore", restore_video_path, method: :patch, class: "btn btn-success" %>
+  <% end %>
 <% end %>
 
 <%= cloudinary_js_config %>
@@ -72,13 +77,14 @@
   var playDuration = 10;
 
   playerInstance.setup({
-      file: url
+      file: url,
+      image: "<%= @video.image_url %>"
   });
 
   jwplayer().on('ready', function() {
     $(".jw-spacer").addClass("br-info")
     $(".br-info").append(balance);
-    email.show();
+    balance.show();
   });
 
   // Preview Upload
@@ -90,7 +96,7 @@
 
       $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) { 
         console.log(data);
-        $(".preview-image").html(data.files[0].name);
+        $(".preview-image").attr("src", "/assets/loading.png")
       });
 
       $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
@@ -98,7 +104,7 @@
         var format = data.result.format;
         var version = data.result.version;
         var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
-        $(".preview-image").html("<img src=" + url + ">");
+        $(".preview-image").attr("src", url);
         console.log(id, format, version, url);
       });
     }

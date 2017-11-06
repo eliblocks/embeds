@@ -1,16 +1,16 @@
 class User < ApplicationRecord
 
   after_create :create_account
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  #other modules: :lockable, :timeoutable
   has_many :videos, dependent: :destroy
   has_many :plays
   has_many :charges
   has_many :payments
   has_one :account, dependent: :destroy
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  devise :omniauthable, :omniauth_providers => [:facebook] #todo: remove?
 
 
 
