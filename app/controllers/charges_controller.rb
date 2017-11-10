@@ -12,7 +12,7 @@ class ChargesController < ApplicationController
     result = attempt_sale(@amount, params[:nonce])
     if result.success?
       puts "success!: #{result.transaction.id}"
-      @charge = current_user.charges.new
+      @charge = current_user.account.charges.new
       @charge.create_from_transaction(result.transaction)
       flash[:success] = "Payment successful!"
       redirect_to root_path

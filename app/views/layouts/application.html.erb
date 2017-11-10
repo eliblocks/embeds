@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <% unless params[:controller] == "embeds" %> 
+    <% unless params[:controller] == "embeds" || params[:action] == "welcome" %> 
       <%= render 'layouts/nav' %>
       <main class="container">
         <% flash.each do |message_type, message| %>

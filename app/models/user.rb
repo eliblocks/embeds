@@ -4,9 +4,6 @@ class User < ApplicationRecord
 
   #other modules: :lockable, :timeoutable
   has_many :videos, dependent: :destroy
-  has_many :plays
-  has_many :charges
-  has_many :payments
   has_one :account, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -23,6 +20,12 @@ class User < ApplicationRecord
     end
   end
 
+  def uploader?
+    videos.any?
+  end
+
+
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -35,6 +38,7 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
 
 
 

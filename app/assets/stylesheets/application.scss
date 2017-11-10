@@ -31,6 +31,19 @@ body {
   margin-bottom: 60px;
 }
 
+.landing-nav {
+  background-color: #e9ecef
+}
+
+.jumbotron {
+  padding: 2rem;
+}
+
+.lead-text {
+  font-size: 1.5rem;
+}
+
+
 .embed-code-container {
   padding: 15px;
 }
@@ -46,6 +59,9 @@ body {
   @extend .bg-light;
 }
 
+.card {
+  height: 100%;
+}
 
 .video-time {
   position: absolute;

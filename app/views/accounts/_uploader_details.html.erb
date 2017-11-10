@@ -1,0 +1,14 @@
+<hr>
+<div class="row">
+  <div class="col-md-5">
+    <h6>Top earning videos</h6>
+    <ul class="list-group">
+      <% @top_earning.each do |video| %>
+        <li class="list-group-item">
+          <%= link_to video[0].title, video_path(video[0]) %>
+          <span class="float-right"><%= video[1] %> min</span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,5 +1,8 @@
 class AccountsController < ApplicationController
   def show
+    @top_uploaders = current_account.most_watched_uploaders(5, 30)
+    @top_videos = current_account.most_watched_videos(5, 30)
+    @top_earning = current_account.most_earned_videos(5, 30)
   end
 
   def edit

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-light landing-nav">
+  <a class="navbar-brand" href="#">Browzable</a>
+  <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+
+    <h1 class="display-3">Monetize your videos</h1>
+    <p class="lead lead-text">Upload your videos and get paid &cent;.7 for every minute watched.</p>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Step 1</h3>
+          <p class="card-text">Upload videos to Browzable. You can set them to be public or unlisted.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Step 2</h3>
+          <p class="card-text">Get the code and embed on your site. Just like Youtube.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Step 3</h3>
+          <p class="card-text">Your embedded videos direct users to log in to Browzable before viewing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <p>Users get 100 free minutes upon sign up (1&cent; per minute afterwards), and can start streaming right away. You get paid .7&cent; for every minute spent streaming your videos.</p>
+    </div>
+  </div>
+
+</div>
+<%= render 'layouts/footer' %>
+
+<!-- Monetize your videos - by the minute -->
+<!-- Pay-per-minute video streaming -->

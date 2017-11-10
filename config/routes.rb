@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   mount ClipUploader.upload_endpoint(:cache) => "/clips/upload"
   mount Shrine.presign_endpoint(:cache) => "/clips/presign"
 
+  authenticated :user do
+    root 'accounts#show', as: :authenticated_root
+  end
 
-  root to: 'videos#index'
+  root to: 'static#welcome'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users
   resources :charges
@@ -37,4 +40,8 @@ Rails.application.routes.draw do
     resources :videos
     get 'sessions/:id', to: 'sessions#impersonate', as: "impersonate"
   end
+
+
+
+
 end

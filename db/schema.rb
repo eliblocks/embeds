@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105203534) do
+ActiveRecord::Schema.define(version: 20171106212139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,33 +43,33 @@ ActiveRecord::Schema.define(version: 20171105203534) do
     t.string "currency"
     t.string "description"
     t.boolean "success"
-    t.bigint "user_id"
+    t.bigint "account_id"
     t.integer "seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_charges_on_user_id"
+    t.index ["account_id"], name: "index_charges_on_account_id"
   end
 
   create_table "payments", force: :cascade do |t|
     t.integer "amount"
     t.integer "seconds"
     t.string "currency"
-    t.bigint "user_id"
+    t.bigint "account_id"
     t.bigint "batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_payments_on_account_id"
     t.index ["batch_id"], name: "index_payments_on_batch_id"
-    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "plays", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "account_id"
     t.bigint "video_id"
     t.integer "duration"
     t.integer "price", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_plays_on_user_id"
+    t.index ["account_id"], name: "index_plays_on_account_id"
     t.index ["video_id"], name: "index_plays_on_video_id"
   end
 
@@ -118,10 +118,10 @@ ActiveRecord::Schema.define(version: 20171105203534) do
   end
 
   add_foreign_key "accounts", "users"
-  add_foreign_key "charges", "users"
+  add_foreign_key "charges", "users", column: "account_id"
   add_foreign_key "payments", "batches"
-  add_foreign_key "payments", "users"
-  add_foreign_key "plays", "users"
+  add_foreign_key "payments", "users", column: "account_id"
+  add_foreign_key "plays", "users", column: "account_id"
   add_foreign_key "plays", "videos"
   add_foreign_key "videos", "users"
 end
