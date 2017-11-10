@@ -31,6 +31,10 @@ body {
   margin-bottom: 60px;
 }
 
+.iframe-redirect-root {
+  position: relative;
+}
+
 .landing-nav {
   background-color: #e9ecef
 }
@@ -245,15 +249,30 @@ input[type='file'] {
   }
 }
 
+
+.embed-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .embedded-signup {
   height: 100%;
   width: 100%;
+  padding: 2em 2em;
+  
+  position: relative;
 }
 
-.landing-bg {
-  background: url("jw_black.png");
+.video-background {
+  opacity: .2;
   background-repeat:no-repeat;
   background-size:cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .signup-header {
@@ -295,6 +314,23 @@ input[type='file'] {
 
 #continue {
   display: none;
+}
+
+.signup-form {
+
+  z-index: 2;
+
+}
+
+.auth-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.btn {
+  z-index: 10;
 }
 
 

@@ -1,17 +1,26 @@
-<div class="text-white embedded-signup container">
-  <h5><%= @video.title %></h5>
+<div class="text-white embedded-signup bg-dark">
+  <div class="signup-form">  
 
-  <p>Premium Video. Sign up with Browzable to view</p>
-  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary", target: "blank", ref: @video.id %>
-   &nbsp;Or&nbsp;  
-   <%= link_to "Log in", new_user_session_path, class: "btn btn-primary", target: "blank" %>
+    <h4 class="text-center">Premium Video</h4>
+    <p class="text-center">Sign up with Browzable and get free minutes to view this video</p>
+    <div class="auth-links">
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary", target: "blank", ref: @video.id %>
+       <span class="mr-4 ml-4">Or</span>
+       <%= link_to "Log in", new_user_session_path, class: "btn btn-primary", target: "blank" %>
+     </div>
+  </div>
+  <div class="video-background">
+
+  </div>
 </div>
 
 
 <script>
-  body = document.querySelector("body");
-  body.classList.add("landing-bg");
+  document.querySelector("body").setAttribute("id", "embed-body");
+  var videoBackground = document.querySelector(".video-background");
+  videoBackground.style.background = "url(<%= @video.image_url %>)";
 </script>
+
 
 
 
