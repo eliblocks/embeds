@@ -46,10 +46,9 @@
             Account
           </a>
           <div class="dropdown-menu dropdown-menu-right nav-item" aria-labelledby="dropdownMenuButton">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Profile", user_path(current_user), class: "dropdown-item" if current_user.videos.any? %>
             <%= link_to "Account", account_path, class: "dropdown-item" %>
-            
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </div>
         

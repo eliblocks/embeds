@@ -6,7 +6,7 @@
       <% @top_earning.each do |video| %>
         <li class="list-group-item">
           <%= link_to video[0].title, video_path(video[0]) %>
-          <span class="float-right"><%= video[1] %> min</span>
+          <span class="float-right"><%= video[1] / 60  %> min</span>
         </li>
       <% end %>
     </ul>
