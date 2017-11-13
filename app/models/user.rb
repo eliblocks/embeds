@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def uploader?
-    videos.any?
+    videos.any? || category == 'uploader'
   end
 
 

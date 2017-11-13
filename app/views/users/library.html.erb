@@ -1,23 +1,27 @@
 <div class="row">
   <div class="col">
-    <table class="table library-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Duration</th>
-          <th>Date Added</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% current_user.videos.order(created_at: :desc).each do |video| %>
-          <tr onclick="window.location = '<%= edit_video_path(video) %>' ">
-            <td><%= video.title %></td>
-            <td><%= youtube_time(video.duration) %></td>
-            <td><%= video.created_at.to_formatted_s(:db) %></td>
+    <% if current_user.videos.any? %>
+      <table class="table library-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Date Added</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% current_user.videos.order(created_at: :desc).each do |video| %>
+            <tr onclick="window.location = '<%= edit_video_path(video) %>' ">
+              <td><%= video.title %></td>
+              <td><%= youtube_time(video.duration) %></td>
+              <td><%= video.created_at.to_formatted_s(:db) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>You don't have any uploaded videos yet. <%= link_to "Upload videos", new_video_path %></p>
+    <% end %>
   </div>
 </div>
 

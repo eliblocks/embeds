@@ -15,7 +15,7 @@ class ChargesController < ApplicationController
       @charge = current_user.account.charges.new
       @charge.create_from_transaction(result.transaction)
       flash[:success] = "Payment successful!"
-      redirect_to root_path
+      redirect_after_payment
     elsif result.transaction
       flash[:danger] = "Error Processing Transaction"
       puts "Error processing transaction:"
@@ -38,4 +38,25 @@ class ChargesController < ApplicationController
       }
     )
   end
+
+  def redirect_after_payment
+    video_id = session[:video_id]
+    ref = session[:ref]
+    puts "video_id:  #{video_id}"
+    puts "ref: #{ref}"
+    session.delete(:video_id)
+    session.delete(:ref)
+
+    if video_id
+      video = Video.find(video_id)
+      if ref == 'site'
+        redirect_to video_path(video)
+      elsif ref == 'embed'
+        redirect_to thank_you_path
+      end
+    else
+      redirect_to root_path
+    end
+  end
+
 end

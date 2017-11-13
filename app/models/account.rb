@@ -51,7 +51,7 @@ class Account < ApplicationRecord
   #copied from videos project
 
   def uploader?
-    user.videos.any?
+    user.videos.any? || user.category == 'uploader'
   end
 
   def last_purchase_date

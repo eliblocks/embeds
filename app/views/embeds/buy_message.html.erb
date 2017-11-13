@@ -1,0 +1,19 @@
+<div class="text-white embedded-signup bg-dark">
+
+  <p class="text-center">Not enough minutes to view this video. Buy more for &cent;1/min.</p>
+  <div class="embedded-links">
+    <%= link_to "Buy minutes", new_charge_path, 
+                class: "btn btn-primary", target: "blank", video_id: @video.id %>
+                
+  </div>
+  <div class="video-background">
+
+  </div>
+</div>
+
+
+<script>
+  document.querySelector("body").setAttribute("id", "embed-body");
+  var videoBackground = document.querySelector(".video-background");
+  videoBackground.style.background = "url(<%= @video.image_url %>)";
+</script>

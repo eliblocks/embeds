@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
 
   root to: 'static#welcome'
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
+
+
   resources :users
   resources :charges
 
@@ -32,7 +34,8 @@ Rails.application.routes.draw do
   get 'account', to: 'accounts#show'
   get 'landing', to: 'embeds#landing'
   get 'video_test/:id', to: 'video_test#show'
-
+  get 'buy_message', to: 'embeds#buy_message'
+  get 'thank_you', to: 'embeds#thank_you'
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'

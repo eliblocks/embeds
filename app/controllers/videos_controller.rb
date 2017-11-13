@@ -19,6 +19,12 @@ class VideosController < ApplicationController
     if @video.removed
       raise ActionController::RoutingError.new('Not Found')
     end
+    if current_account.balance < @video.duration
+      flash[:notice] = "Not enough minutes to view that video."
+      session[:video_id] = @video.id
+      session[:ref] = 'site'
+      redirect_to new_charge_path()
+    end
   end
 
   # GET /videos/new
