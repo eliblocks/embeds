@@ -39,7 +39,7 @@ gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-elastictranscoder'
 gem 'aws-sdk-cloudfront'
 gem 'shrine'
-gem 'sucker_punch'
+gem 'sucker_punch' #remove
 gem 'jquery-fileupload-rails'
 gem 'devise'
 gem 'sidekiq'
@@ -47,6 +47,7 @@ gem 'omniauth-facebook'
 gem 'cloudinary'
 gem 'braintree'
 gem 'paypal-sdk-rest'
+gem 'sendgrid-ruby'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
