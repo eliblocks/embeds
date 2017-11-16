@@ -9,8 +9,13 @@
     </p> -->
 
     <div class="minutes-balance">
-      <span class="balance-span">Browzable <%= link_to number_to_human(current_user.account.balance / 60), 
-        root_path, class: "icon-link" %></span>
+      <%= link_to root_path, class: "icon-link" do %>
+        <div class="link-container">
+          <%= image_tag "browzable_logo_white.png", width: 74, height: 18 %> 
+          <span class="divider-player">&#8226;</span>
+          <%= number_to_human(current_user.account.balance / 60) %>
+        </div>
+      <% end %>
     </div>
     <%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.cdn_url, video_id: @video.id } do %>
       <div id="browzable-video"></div>
@@ -78,8 +83,9 @@
   // Embed JWplayer
 
   jwplayer().on('ready', function() {
-    $(".jw-spacer").addClass("br-info")
-    $(".br-info").append(balance);
+    $(".jw-spacer").after($(".minutes-balance"));
+
+
     balance.show();
   });
 

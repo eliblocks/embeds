@@ -35,8 +35,8 @@ body {
   position: relative;
 }
 
-.landing-nav {
-  background-color: #e9ecef
+.bg-green {
+  background-color: #00d1b2;
 }
 
 .jumbotron {
@@ -112,9 +112,14 @@ body {
   margin-left: 1rem;
 }
 
-.footer-links a {
-  color: black;
+.footer-link {
+  color: rgba(0, 0, 0, 0.5);
+  &:hover {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+  }
 }
+
 
 .uploader-link {
   color: black;
@@ -283,7 +288,7 @@ input[type='file'] {
 }
 
 .minutes-balance {
-  color: white;
+  height: 44px;
   display: none;
 }
 
@@ -295,6 +300,23 @@ input[type='file'] {
 
 .balance-span {
   margin-right: 0px;
+}
+
+.link-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: .75em;
+  margin-right: .5em;
+  img {
+    margin-bottom: .1em;
+  }
+}
+
+.divider-player {
+  margin-right: .3em;
+  margin-left: .3em;
 }
 
 .icon-link {
@@ -354,10 +376,17 @@ input[type='file'] {
 
 .br-balance {
   color: black;
+  font-weight: bold;
+  font-size: 1.2em;
   &:hover {
     text-decoration: none;
     color: black;
   }
+}
+
+.dot-separator {
+  margin-right: .2em;
+  margin-left: .2em;
 }
 
 .video-upload {
