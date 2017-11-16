@@ -1,27 +1,24 @@
 <br>
 <%= form_with(model: @video, local: true) do |form| %>
   <div class="form-row">
-    <div class="col-md-5">
+    <div class="col-md-5 mb-4">
       <%= content_tag :div, "", 
         class: "browzable-wrapper", 
         data: { url: @video.clip.url, video_id: @video.id } do %>
           <div id="browzable-video"></div>
       <% end %>
     </div>
-    <div class="form-group col-md-5">
-      
-      <div>
-        <% if @video.image %>
+    <div class="form-group preview-group col-md-5">
+        <div class="profile-pic">
           <%= cl_image_tag(@video.image, width: 200, class: "preview-image") %>
-        <% end %>
-        <div>
-          <%= form.label :image, "Preview Image" %>
         </div>
-      </div>
-      <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
+        <div class="preview-loader"></div>
+        <div class="mt-2">
+          <label for="preview-upload" class="btn btn-secondary">Change preview</label>
+          <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
+        </div>
     </div>
   </div>
-  <br>
   <div class="form-row">
     <div class="col-md-5">
       <div class="form-group">
@@ -87,6 +84,8 @@
     balance.show();
   });
 
+  $(".cloudinary-fileupload").attr("id", "preview-upload");
+
   // Preview Upload
   $(function() {
     if($.fn.cloudinary_fileupload !== undefined) {
@@ -94,9 +93,8 @@
       $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload({
       });
 
-      $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) { 
-        console.log(data);
-        $(".preview-image").attr("src", "/assets/loading.png")
+      $('.cloudinary-fileupload').bind('fileuploadadd', function(e, data) { 
+        $(".loader").show();
       });
 
       $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
@@ -105,6 +103,7 @@
         var version = data.result.version;
         var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
         $(".preview-image").attr("src", url);
+        $(".loader").hide();
         console.log(id, format, version, url);
       });
     }
