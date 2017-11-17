@@ -82,6 +82,9 @@
   jwplayer().on('ready', function() {
     $(".jw-spacer").after($(".minutes-balance"));
     balance.show();
+  });
+
+  jwplayer().on('viewable', function() {
     $(".video-info-container").show();
   });
 

@@ -24,6 +24,10 @@ class User < ApplicationRecord
     videos.any? || category == 'uploader'
   end
 
+  def viewer?
+    !uploader?
+  end
+
 
 
 

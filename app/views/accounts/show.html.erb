@@ -1,6 +1,10 @@
 <br>
 
 <h4 class="text-center"><%= current_user.full_name %> Account Information</h4>
+<h6>Email: <%= current_user.email %></h6>
+<% if current_user.paypal_email %>
+  Paypal email: <%= current_user.paypal_email %>
+<% end %>
 <h6>Balance: <%= current_account.balance / 60 %></h5>
 <ul>
   <% if current_account.uploader? %>
@@ -9,11 +13,9 @@
   <li>Streamed <%= current_account.minutes_used_last_30 %> minutes in the last 30 days</li>
   <li>Purchased <%= current_account.minutes_purchased_last_30 %> minutes in the last 30 days</li>
 </ul>
-<%#= link_to "Edit account", edit_user_registration_path %>
-<% if current_user.videos.any? %>
-  <%= render 'uploader_details' %>
-<% end %>
-<%= render 'viewer_details' %>
+
+<%= link_to "Edit account", edit_user_registration_path %>
+
 
 
 

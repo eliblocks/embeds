@@ -1,12 +1,13 @@
 class AccountsController < ApplicationController
-  def show
-    @top_uploaders = current_account.most_watched_uploaders(5, 30)
-    @top_videos = current_account.most_watched_videos(5, 30)
-    @top_earning = current_account.most_earned_videos(5, 30)
-  end
 
   def edit
     @account = current_user.account
+  end
+
+  def show
+    @top_earning = current_account.most_earned_videos(5, 30)
+    @top_uploaders = current_account.most_watched_uploaders(5, 30)
+    @top_videos = current_account.most_watched_videos(5, 30)
   end
 
   def update
@@ -19,7 +20,6 @@ class AccountsController < ApplicationController
       render 'edit'
     end
   end
-
 
   def submitted_params
     params.permit(:paypal_email)
@@ -35,5 +35,14 @@ class AccountsController < ApplicationController
     end
   end
 
+  def usage
+    @top_uploaders = current_account.most_watched_uploaders(5, 30)
+    @top_videos = current_account.most_watched_videos(5, 30)
+  end
+
+  def dashboard
+    redirect_to new_video_path unless current_user.videos.any?
+    @top_earning = current_account.most_earned_videos(5, 30)
+  end
 
 end

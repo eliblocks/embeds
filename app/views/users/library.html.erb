@@ -6,6 +6,7 @@
           <tr>
             <th>Title</th>
             <th>Duration</th>
+            <th>Views</th>
             <th>Date Added</th>
           </tr>
         </thead>
@@ -14,14 +15,18 @@
             <tr onclick="window.location = '<%= edit_video_path(video) %>' ">
               <td><%= video.title %></td>
               <td><%= youtube_time(video.duration) %></td>
+              <td><%= video.minutes %></td>
               <td><%= video.created_at.to_formatted_s(:db) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% else %>
-      <p>You don't have any uploaded videos yet. <%= link_to "Upload videos", new_video_path %></p>
+
+    <br><p>You don't have any uploaded videos yet. <%= link_to "Upload videos", new_video_path %></p>
     <% end %>
   </div>
 </div>
+
+
 

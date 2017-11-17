@@ -9,7 +9,7 @@
       <% end %>
       <span class="dot-separator">&#8226;</span>
       <%= link_to(current_user.account.balance/60, 
-                  account_path, class: "br-balance") %>
+                  root_path, class: "br-balance") %>
     </div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,8 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right nav-item" aria-labelledby="dropdownMenuButton">
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item" if current_user.videos.any? %>
+            <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" if current_user.uploader? %>
+            <%= link_to "Usage", usage_path, class: "dropdown-item" %>
             <%= link_to "Account", account_path, class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>

@@ -2,11 +2,17 @@ Rails.application.routes.draw do
   mount ClipUploader.upload_endpoint(:cache) => "/clips/upload"
   mount Shrine.presign_endpoint(:cache) => "/clips/presign"
 
-  authenticated :user do
-    root 'accounts#show', as: :authenticated_root
-  end
 
-  root to: 'static#welcome'
+  root to: 'static#welcome', constraints:
+    lambda { |request| request.env['warden'].user == nil }
+
+  root to: 'accounts#usage', constraints:
+    lambda { |request| request.env['warden'].user.viewer? }
+
+  root to: 'accounts#dashboard', constraints:
+    lambda { |request| request.env['warden'].user.uploader? }
+
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
 
 
@@ -29,7 +35,9 @@ Rails.application.routes.draw do
 
   patch 'accounts', to: 'accounts#update'
   get 'accounts/edit', to: 'accounts#edit'
-  get 'accounts/show', to: 'accounts#show'
+  get 'accounts/show' , to: 'accounts#show'
+  get 'dashboard', to: 'accounts#dashboard'
+  get 'usage', to: 'accounts#usage'
   get 'library', to: 'users#library'
   get 'account', to: 'accounts#show'
   get 'landing', to: 'embeds#landing'
