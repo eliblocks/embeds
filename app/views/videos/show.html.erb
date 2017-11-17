@@ -11,7 +11,7 @@
     <div class="minutes-balance">
       <%= link_to root_path, class: "icon-link" do %>
         <div class="link-container">
-          <%= image_tag "browzable_logo_white.png", width: 74, height: 18 %> 
+          <%= image_tag "browzable_logo_white.png", width: 130, height: 32 %> 
           <span class="divider-player">&#8226;</span>
           <%= number_to_human(current_user.account.balance / 60) %>
         </div>
@@ -26,10 +26,8 @@
         <button type="button" class="btn btn-secondary share-link" data-toggle="modal" data-target="#iframe-modal">Share</button>
         <hr>
       <div class="user-info">
-       <%= cl_image_tag(@video.user.account.image, :transformation=>[
-          {:gravity=>"face", :radius=>"max", crop: "crop" },
-          {:width=>200, :crop=>"scale"}
-          ]) %>
+       <%= cl_image_tag @video.user.account.image, client_hints: true, transformation: [ 
+                          { gravity: "auto", width: "50", height: "50", radius: "max", crop: "fill" }] %>
         <%= link_to @video.user.full_name, user_path(@video.user), class: "uploader-link" %>
       </div>
       
@@ -76,17 +74,15 @@
 
   playerInstance.setup({
       autostart: "true",
-      file: url,
-      image: "<%= @video.image_url %>"
+      file: url
   });
 
   // Embed JWplayer
 
   jwplayer().on('ready', function() {
     $(".jw-spacer").after($(".minutes-balance"));
-
-
     balance.show();
+    $(".video-info-container").show();
   });
 
   //inaccurate timekeeping
