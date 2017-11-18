@@ -10,7 +10,7 @@ class VideosController < ApplicationController
     .includes(:user)
     .order(created_at: :desc)
     .page(params[:page])
-    .per(10)
+    .per(12)
   end
 
   # GET /videos/1
@@ -98,6 +98,11 @@ class VideosController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def search
+    @videos = Video.search(params[:q])
+    render 'index'
   end
 
   private

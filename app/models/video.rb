@@ -1,8 +1,16 @@
 class Video < ApplicationRecord
   include ClipUploader[:clip]
+  include AlgoliaSearch
+
   belongs_to :user
   has_many :plays
 
+  algoliasearch per_environment: true do
+    attribute :title, :views
+    searchableAttributes ['title']
+    hitsPerPage 12
+    customRanking ['desc(views)']
+  end
 
   def signed_cloudfront_url
     signer = Aws::CloudFront::UrlSigner.new(
