@@ -9,10 +9,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if ((params[:controller] == "videos" || params[:controller] == "embeds") && 
-        (params[:action] == "show" || params[:action] == "edit")) %>
-      <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
-    <% end %>
+    <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
     <script src="https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js"></script>
   </head>
 
