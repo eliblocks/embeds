@@ -1,0 +1,12 @@
+<br>
+<%= link_to "Users", admin_users_path %>
+<br>
+<%= link_to "Videos", admin_videos_path %>
+<br><br>
+
+
+
+Users: <%= @users_count %><br>
+Videos: <%= @videos_count %><br>
+Last sign up: <%= @last_signup.email %> - <%= @last_signup.created_at %></br>
+Last upload: <%= @last_upload.title %> - <%= @last_upload.created_at %><br>

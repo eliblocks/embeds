@@ -1,33 +1,23 @@
 $(document).on("turbolinks:load", function() {
-
+  var signature = 0002066747970;
   $(".video-upload").fileupload({
     sequentialUploads: true,
 
     add: function(e, data) {
       console.log("add", data);
 
-    
-      getFileDuration(data)
-
-   
+      getFileDuration(data);
 
       data.progressBar = buildFileRow(data);
+
       console.log(data.progressBar);
 
-      
-      
       var options      = {
         extension: data.files[0].name.match(/(\.\w+)?$/)[0], // set the file extension
         _: Date.now() // prevent caching
       };
 
-      $.getJSON("/clips/presign", options, function(result) {
-        console.log("presign", result);
-        data.formData  = result.fields;
-        data.url       = result.url;
-        data.paramName = "file";
-        data.submit();
-      });
+      getFileHex(data, options, logResult)   
     },
 
     progress: function(e, data) {
@@ -41,10 +31,7 @@ $(document).on("turbolinks:load", function() {
 
       console.log("done", data);
       $("#continue").show(); 
-      // data.progressBar.remove();
  
-
-
       var clip = {
         id:       data.formData.key, // we have to remove the prefix part
         storage:  'cache',
@@ -58,13 +45,11 @@ $(document).on("turbolinks:load", function() {
 
       var form = $(this).closest("form");
    
-
       var formData = new FormData(form[0]);
       formData.append($(this).attr("name"), JSON.stringify(clip));
       formData.append("video[title]", clip.metadata.filename);
       console.log(clip.metadata.filename);
       
-
       $.ajax(form.attr("action"), {
         contentType: false,
         processData: false,
@@ -73,11 +58,20 @@ $(document).on("turbolinks:load", function() {
         dataType:    "json",
         success: function(response) {
           console.log("response", response);
-
         }
       });
     }
   });
+
+  function submitFile(data, options) {
+    $.getJSON("/clips/presign", options, function(result) {
+      console.log("presign", result);
+      data.formData  = result.fields;
+      data.url       = result.url;
+      data.paramName = "file";
+      data.submit();
+    });
+  }
 
   function buildFileRow(data) {
     var fileName = data.files[0].name;
@@ -98,6 +92,39 @@ $(document).on("turbolinks:load", function() {
 
     }
     video.src = URL.createObjectURL(data.files[0]);
+  }
+
+  function logResult(data, options, hex) {
+    if (parseInt(hex) === signature) {
+      submitFile(data, options);
+    } else {
+      displayFileTypeError(data);
+    }
+  }
+
+  function getFileHex(data, options, callback) {
+    // const signature = 0002066747970
+    
+    var file = data.files[0];
+    var blob = file.slice(0, 8);
+    const filereader = new FileReader()
+    filereader.readAsArrayBuffer(blob);
+
+    filereader.onloadend = function(e) {
+      const uint = new Uint8Array(e.target.result);
+      let bytes = [];
+      uint.forEach((byte) => {
+          bytes.push(byte.toString(16));
+      })
+      hex = bytes.join('').toUpperCase();
+      callback(data, options, hex)
+    }
+  }
+
+  function displayFileTypeError(data) {
+    data.progressBar.parent().addClass("list-group-item-danger");
+    $(".file_type_alert").html("Only mp4 is allowed");
+    $(".file_type_alert").addClass("alert alert-danger");
   }
 
 });

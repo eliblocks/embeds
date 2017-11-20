@@ -13,7 +13,7 @@
         <div class="link-container">
           <%= image_tag "browzable_logo_white.png", width: 130, height: 32 %> 
           <span class="divider-player">&#8226;</span>
-          <%= number_to_human(current_user.account.balance / 60) %>
+          <span id="balance"><%= number_to_human(current_user.account.balance / 60) %></span>
         </div>
       <% end %>
     </div>
@@ -66,11 +66,10 @@
   
   var wrapper = document.querySelector(".browzable-wrapper");
   var url = wrapper.dataset.url;
-  console.log(url);
   var videoId = wrapper.dataset.videoId;
   var playerInstance = jwplayer("browzable-video");
-  var balance = $(".minutes-balance");
   var playDuration = 10;
+  var balance = <%= current_account.balance %>
 
   playerInstance.setup({
       autostart: "true",
@@ -81,7 +80,8 @@
 
   jwplayer().on('ready', function() {
     $(".jw-spacer").after($(".minutes-balance"));
-    balance.show();
+    $(".minutes-balance").show();
+
   });
 
   jwplayer().on('viewable', function() {
@@ -95,7 +95,6 @@
 
   jwplayer().on('time', function(time) {
     counter += time.position - prevPosition;
-    console.log(counter);
     prevPosition = time.position;
     if (counter > playDuration) {
       sendPlay();
@@ -121,7 +120,14 @@
 
     request.done(function( msg ) {
       console.log(msg);
+      updateBalance();
     });
+  }
+
+  function updateBalance () {
+    balance -= playDuration;
+    console.log(balance);
+    $("#balance")[0].innerHTML = Math.floor(balance/60);
   }
   
   

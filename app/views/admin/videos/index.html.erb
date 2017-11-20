@@ -2,7 +2,7 @@
 
 <h1>Videos</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -29,6 +29,12 @@
         <td><%= video.balance %></td>
         <td><%= video.views %></td>
         <td><%= video.user.full_name %></td>
+        <td>
+          <%= button_to toggle_approval_admin_video_path(video), method: :patch, class: "btn btn-primary" do %>
+            <%= video.approved? ? "Unapprove" : "Approve" %>
+          <% end %>
+        </td>
+        <td><%= link_to "Download", video.clip.url %></td>
         <td><%= link_to 'Show', video, 'data-turbolinks' => 'false' %></td>
         <td><%= link_to 'Edit', edit_video_path(video) %></td>
         <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>

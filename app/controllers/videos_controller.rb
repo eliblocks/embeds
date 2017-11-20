@@ -42,15 +42,12 @@ class VideosController < ApplicationController
     @video = Video.new(video_params)
     @video.user = current_user
     @video.image = Rails.configuration.default_image
-
-    respond_to do |format|
-      if @video.save
-        flash[:success] = "Video successfully created"
-        redirect_to @video
-      else
-        render :new
-      end
+    if @video.save
+      puts "Success!"
+    else
+      puts "Fail: #{@video.error.full_messages}"
     end
+    head :ok
   end
 
   # PATCH/PUT /videos/1

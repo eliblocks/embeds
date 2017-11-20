@@ -1,15 +1,12 @@
-<br><br>
+<br>
+<br>
 <div class="row">
   <div class="col-md-6 m-auto text-center">
-
-
-
-
+    <div class="file_type_alert"></div>
     <%= form_with(model: Video.new, local: true) do |form| %>
       <% if @video.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
-
           <ul>
           <% @video.errors.full_messages.each do |message| %>
             <li><%= message %></li>
