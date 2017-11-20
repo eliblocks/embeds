@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   protected
     def after_sign_in_path_for(resource)
-      if request.referrer.gsub(/\?.*/, '') == landing_url
+      if request.referrer && request.referrer.gsub(/\?.*/, '') == landing_url
         video_id = params['video_id']
         embed_path(video_id) || root_path
       else
