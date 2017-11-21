@@ -3,7 +3,7 @@ class PlaysController < ApplicationController
     @play = Play.new(play_params)
     @video = Video.find(params[:play][:video_id])
     @play.price = @video.price
-    @play.account = current_account
+    @play.account_id = current_account.id
     if @play.save
       @video.update_views(@play)
       print "user#{current_user}"

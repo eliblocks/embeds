@@ -9,8 +9,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   devise :omniauthable, :omniauth_providers => [:facebook] #todo: remove?
 
-
-
   def create_account
     account = Account.new(user_id: id, image: Rails.configuration.default_profile_image)
     if account.save
@@ -28,9 +26,6 @@ class User < ApplicationRecord
     !uploader?
   end
 
-
-
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -42,9 +37,4 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
-
-
-
-
-
 end

@@ -91,7 +91,6 @@ class Account < ApplicationRecord
     payments.sum(:seconds) || 0
   end
 
-
   def video_earnings_last(n)
     Play.select(:video_id, :duration)
       .where('created_at > ?', n.days.ago)
