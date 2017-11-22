@@ -24,4 +24,14 @@ module ApplicationHelper
     current_page?(path) ? active_status = 'active' : active_status = ''
     link_to(text, path, class: "nav-link #{active_status}")
   end
+
+  def full_title(page_title = '')
+    base_title = "Browzable"
+    if page_title.empty?
+      base_title
+    else
+      page_title + " | " + base_title
+    end
+  end
+
 end
