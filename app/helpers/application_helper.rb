@@ -34,4 +34,13 @@ module ApplicationHelper
     end
   end
 
+  def description_meta_tag(description = '')
+    if description == ''
+      return nil
+    end
+    content_tag(:meta, "", name:'description', content: description)
+  end
+
+
+
 end

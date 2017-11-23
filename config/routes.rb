@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'video_test/:id', to: 'video_test#show'
   get 'buy_message', to: 'embeds#buy_message'
   get 'thank_you', to: 'embeds#thank_you'
+  get 'stats', to: 'static#stats'
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'

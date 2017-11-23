@@ -36,7 +36,7 @@
         <%= form_tag("/search", method: :get, class: "form-inline my-2 my-lg-0") do %>
           <div class="input-group search-group">
             <%= text_field_tag(:q, "", class: "search-control form-control", 
-                                placeholder: "Search", id: "search-input") %>
+                                placeholder: "Search videos", id: "search-input") %>
             <span class="input-group-btn">
               <button type="submit" class="btn btn-secondary"><%= fa_icon "search" %></button>
             </span>

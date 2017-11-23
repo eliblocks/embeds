@@ -5,8 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
+    <% if current_page?(new_user_registration_path) %>
+      <!-- Event snippet for Sign Up conversion page -->
+      <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-826306890/0IadCM31vHkQyuKBigM',
+            'event_callback': callback
+        });
+        return false;
+      }
+      </script>
+    <% end %>
 
+    <%= csrf_meta_tags %>
+    <%= description_meta_tag(yield(:description)) %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
@@ -17,8 +35,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-110066951-1');
+      gtag('config', 'AW-826306890');
     </script>
   </head>
 
@@ -38,3 +56,13 @@
 
   </body>
 </html>
+
+
+
+
+<!-- Event snippet for Sign Up conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+
+
+
+
