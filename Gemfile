@@ -49,6 +49,7 @@ gem 'braintree'
 gem 'paypal-sdk-rest'
 gem 'sendgrid-ruby'
 gem 'algoliasearch-rails'
+gem 'ahoy_matey'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
