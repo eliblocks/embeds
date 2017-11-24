@@ -1,5 +1,7 @@
 $(document).on("turbolinks:load", function() {
   var signature = 0002066747970;
+  var signature1 = '000';
+  var signature2 = '66747970';
   $(".video-upload").fileupload({
     sequentialUploads: true,
 
@@ -95,7 +97,7 @@ $(document).on("turbolinks:load", function() {
   }
 
   function logResult(data, options, hex) {
-    if (parseInt(hex) === signature) {
+    if (hex.slice(0,3) === signature1 && hex.slice(5,13) === signature2) {
       submitFile(data, options);
     } else {
       displayFileTypeError(data);
@@ -112,11 +114,11 @@ $(document).on("turbolinks:load", function() {
     filereader.onloadend = function(e) {
       var uint = new Uint8Array(e.target.result);
       var bytes = [];
-      uint.forEach((byte) => {
+      uint.forEach(function(byte) {
           bytes.push(byte.toString(16));
       })
       hex = bytes.join('').toUpperCase();
-      callback(data, options, hex)
+      callback(data, options, hex);
     }
   }
 
