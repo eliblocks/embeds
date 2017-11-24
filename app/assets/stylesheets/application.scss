@@ -447,6 +447,10 @@ input[type='file'] {
   @extend .btn-primary;
 }
 
+.custom-file-upload-lg {
+  @extend .btn-lg;
+}
+
 #continue {
   display: none;
 }

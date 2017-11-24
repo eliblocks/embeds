@@ -121,3 +121,8 @@ class VideosController < ApplicationController
                     :approved, :clip, :balance, :views, :user_id, :public)
     end
 end
+
+
+
+
+#@videos = Video.approved.where.not(removed: true).where(public: true).includes(:user).order(created_at: :desc).page(params[:page]).per(12)
