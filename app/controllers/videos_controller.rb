@@ -5,7 +5,8 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.where.not(removed: true)
+    @videos = Video.approved
+    .where.not(removed: true)
     .where(public: true)
     .includes(:user)
     .order(created_at: :desc)

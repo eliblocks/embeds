@@ -5,6 +5,8 @@ class Video < ApplicationRecord
   belongs_to :user
   has_many :plays
 
+  scope :approved, -> { where(approved: true) }
+
   algoliasearch per_environment: true do
     attribute :title, :views
     searchableAttributes ['title']
