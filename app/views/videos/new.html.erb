@@ -20,7 +20,8 @@
           Choose videos to upload
         </label>
         <%= form.file_field :clip, id: :video_clip, 
-            multiple: true, 
+            multiple: true,
+            accept: ".mp4",
             name: "video[clip]", 
             class: "form-control-file video-upload" %>
       </div>
