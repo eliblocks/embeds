@@ -103,16 +103,15 @@ $(document).on("turbolinks:load", function() {
   }
 
   function getFileHex(data, options, callback) {
-    // const signature = 0002066747970
     
     var file = data.files[0];
     var blob = file.slice(0, 8);
-    const filereader = new FileReader()
+    var filereader = new FileReader()
     filereader.readAsArrayBuffer(blob);
 
     filereader.onloadend = function(e) {
-      const uint = new Uint8Array(e.target.result);
-      let bytes = [];
+      var uint = new Uint8Array(e.target.result);
+      var bytes = [];
       uint.forEach((byte) => {
           bytes.push(byte.toString(16));
       })
