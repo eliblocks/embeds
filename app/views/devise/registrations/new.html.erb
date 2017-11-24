@@ -1,8 +1,9 @@
 <% provide(:title, "Sign up") %>
+<br>
 <div class="row">
   <div class="col-md-6 m-auto">
 
-      <h2 class="text-center">Sign up</h2>
+      <h2 class="text-center">Sign up</h2><br>
 
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -20,11 +21,11 @@
       </div>
 
       <% if request.referrer && URI(request.referrer).path == '/' %>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <%= f.label :paypal_email %>
           <em>(if different from account email)</em>
           <%= f.email_field :paypal_email, class: "form-control" %>
-        </div>
+        </div> -->
         <%= f.hidden_field :category, value: "uploader" %>
       <% end %>
 
