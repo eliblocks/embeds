@@ -1,10 +1,9 @@
-/*
-*= require_tree .
-*= require_self
-*/
-
 @import "bootstrap";
 @import "font-awesome";
+@import "static";
+@import "videos";
+@import "users";
+@import "embeds";
 
 html {
   position: relative;
