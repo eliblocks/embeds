@@ -2,18 +2,18 @@ class EmbedsController < ApplicationController
   def show
     @video = Video.find(params[:id])
 
-    if @video.removed
-      raise ActionController::RoutingError.new('Not Found')
+    if @video.removed || @video.suspended
+      render 'unavailable'
     end
 
-    unless user_signed_in?
+    if user_signed_in?
+      if current_account.balance < @video.duration
+        redirect_to buy_message_path
+        session[:video_id] = @video.id
+        session[:ref] = 'embed'
+      end
+    else
       redirect_to landing_path(video_id: @video.id)
-    end
-
-    if current_account.balance < @video.duration
-      redirect_to buy_message_path
-      session[:video_id] = @video.id
-      session[:ref] = 'embed'
     end
   end
 

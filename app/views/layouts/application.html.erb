@@ -27,6 +27,7 @@
     <%= description_meta_tag(yield(:description)) %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <script src="https://content.jwplatform.com/libraries/nS0lyy3E.js"> </script>
     <script src="https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -40,7 +41,7 @@
     </script>
   </head>
 
-  <body>
+<%= content_tag :body, data: { action: action_name, controller: controller_name } do %>
     <% unless params[:controller] == "embeds" || params[:action] == "welcome" %> 
       <%= render 'layouts/nav' %>
       <main class="container">
@@ -53,8 +54,7 @@
     <% else %>
       <%= yield %>
     <% end %>
-
-  </body>
+  <% end %>
 </html>
 
 

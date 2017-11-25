@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123184157) do
+ActiveRecord::Schema.define(version: 20171125175626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20171123184157) do
     t.boolean "public", default: false
     t.string "image"
     t.boolean "removed", default: false
+    t.boolean "suspended", default: false
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 

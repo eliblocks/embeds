@@ -100,6 +100,13 @@ class VideosController < ApplicationController
 
   def search
     @videos = Video.search(params[:q])
+      .approved
+      .where(public: true)
+      .where.not(removed: true)
+      .includes(:user)
+      .order(:created_at)
+      .page(params[:page])
+      .per(12)
     render 'index'
   end
 

@@ -1,21 +1,7 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
-
-
+*= require_tree .
+*= require_self
+*/
 
 @import "bootstrap";
 @import "font-awesome";
@@ -35,45 +21,12 @@ body {
   position: relative;
 }
 
-.bg-green {
-  background-color: #00d1b2;
-}
-
-.jumbotron {
-  padding: 2rem;
-}
-
-.lead-text {
-  font-size: 1.5rem;
-}
-
-
-.embed-code-container {
-  padding: 15px;
-}
-
 .share-link {
   float: right;
 }
 
-.library-table tbody {
-  cursor: pointer;
-}
-.library-table tbody tr:hover { 
-  @extend .bg-light;
-}
-
 .card {
   height: 100%;
-}
-
-.video-time {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: white;
-  font-weight: bold;
-  z-index: 1;
 }
 
 .alert-notice {
@@ -91,7 +44,6 @@ body {
     margin: 0 0 30px 0;
   }
 }
-
 
 .footer {
   position: absolute;
@@ -120,17 +72,6 @@ body {
   }
 }
 
-
-.uploader-link {
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-  &:hover {
-    color: black;
-    text-decoration: none;
-  }
-}
-
 #navbarDropdown {
   cursor: pointer;
 }
@@ -150,55 +91,9 @@ body {
 }
 
 // clickable card
-.clickable {
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left: 0;
-  z-index: 1;
-}
-
-.user-link {
-  position: relative;
-  z-index: 2;
-
-}
 
 .preview-group {
   position: relative;
-}
-
-
-.profile-pic {
-  margin-bottom: 1em;
-  position: relative;
-}
-
-.profile-card {
- display: flex;
- flex-direction: column;
- align-items: center;
-//   justify-content: center; 
-}
-
-.profile-header-row {
-  margin-top: 2em;
-  display: flex;
-  justify-content: center;
-}
-
-.edit-profile-row {
-  display: flex;
-  justify-content: center;
-}
-
-.edit-profile-card {
-
-}
-
-.profile-save {
-  display: none;
 }
 
 
@@ -241,44 +136,6 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-
-
-.br-card-img-link {
-  position: relative;
-}
-
-.br-card-link {
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-.br-card a:hover {
-  color: black;
-}
-
-
-.br-card-title {
-  color: black;
-  font-size: 1.2em;
-  font-weight: 500;
-  &:hover {
-    color: black;
-  }
-}
-
-.br-card-subtitle {
-  font-weight: 400;
-
-}
-
-
-.br-card-body {
-  position: relative;
-  padding-top: 0.75em;
-
-}
-
 .btn-square {
   border-radius: 0;
 }
@@ -286,57 +143,15 @@ body {
 .input-square {
   border-radius: 0;
 }
-.video-info-container {
-  padding: 1.25em;
-  display: none;
-}
-
-#browzable-video {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-
-
-#embed-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: absolute;
-}
 
 input[type='file'] {
   color: transparent;
-}
-
-.minutes-balance {
-  height: 44px;
-  display: none;
 }
 
 .br-info {
   display: flex !important;
   align-self: center !important;
   justify-content: flex-end;
-}
-
-.balance-span {
-  margin-right: 0px;
-}
-
-.link-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-right: 1em;
-  img {
-    margin-bottom: .3em;
-  }
 }
 
 @media (max-width: 576px) {
@@ -360,11 +175,6 @@ input[type='file'] {
   }
 }
 
-.divider-player {
-  margin-right: .3em;
-  margin-left: .3em;
-}
-
 .icon-link {
   color: white;
   text-decoration: none;
@@ -372,40 +182,6 @@ input[type='file'] {
     color: white;
     text-decoration: none;
   }
-}
-
-.user-info img {
-  width: 25px;
-  height: 25px;
-}
-
-.embed-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.embedded-signup {
-  height: 100%;
-  width: 100%;
-  padding: 2em 2em;
-  
-  position: relative;
-}
-
-.video-background {
-  opacity: .2;
-  background-repeat:no-repeat;
-  background-size:cover;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.signup-header {
-  text-align: center;
 }
 
 .browzable-brand {
@@ -439,10 +215,6 @@ input[type='file'] {
   margin-left: .2em;
 }
 
-.video-upload {
-  display: none;
-}
-
 .cloudinary-fileupload {
   display: none;
 }
@@ -460,23 +232,6 @@ input[type='file'] {
   @extend .btn-lg;
 }
 
-#continue {
-  display: none;
-}
-
-.signup-form {
-
-  z-index: 2;
-
-}
-
-.embedded-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
-}
-
 .btn {
   z-index: 10;
 }
@@ -488,39 +243,6 @@ input[type='file'] {
 .search-control:focus {
   box-shadow: none;
 }
-
-.sales-card {
-  background-color: #effeff;
-}
-
-.home-title {
-  font-weight: bold;
-  font-size: 49px !important;
-  color: #ffffff;
-}
-
-.home-subtitle {
-  font-weight: 250;
-  font-size: 25px !important;
-  line-height: 49px !important;
-  margin-top: 15px;
-  margin-bottom: 25px !important;
-  color: #ffffff;
-}
-
-
-
-
-// #search-input {
-//   outline: none !important;
-// }
-
-
-
-
-
-
-
 
 
 

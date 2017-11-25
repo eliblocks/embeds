@@ -2,25 +2,7 @@
 <div class="row">
   <div class="col-lg-10 m-auto">
     <p id="notice"><%= notice %></p>
-    
-
-    <!-- <p>
-      <strong>URL:</strong>
-      <%#= @video.secret_url %>
-    </p> -->
-
-    <div class="minutes-balance">
-      <%= link_to root_path, class: "icon-link" do %>
-        <div class="link-container">
-          <%= image_tag "browzable_logo_white.png", width: 130, height: 32 %> 
-          <span class="divider-player">&#8226;</span>
-          <span id="balance"><%= number_to_human(current_user.account.balance / 60) %></span>
-        </div>
-      <% end %>
-    </div>
-    <%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.cdn_url, video_id: @video.id } do %>
-      <div id="browzable-video"></div>
-    <% end %>
+    <%= render 'shared/player' %>
     <div class="video-info-container">
         <h4><%= @video.title %></h4>
         <span><%= @video.minutes %> Views</span> | <span><%= time_ago_in_words(@video.created_at) %> ago</span>
@@ -31,9 +13,7 @@
                           { gravity: "auto", width: "50", height: "50", radius: "max", crop: "fill" }] %>
         <%= link_to @video.user.full_name, user_path(@video.user), class: "uploader-link" %>
       </div>
-      
     </div>
-  
   </div>
 </div>
 
@@ -56,80 +36,5 @@
   </div>
 </div>
 
-
-
-<%#= video_tag @video.clip.url, controls: true %>
-<%#= video_tag @video.secret_url, width: 640, controls: true %>
-
-
-
-<script type="text/javaScript">
-  
-  var wrapper = document.querySelector(".browzable-wrapper");
-  var url = wrapper.dataset.url;
-  var videoId = wrapper.dataset.videoId;
-  var playerInstance = jwplayer("browzable-video");
-  var playDuration = 10;
-  var balance = <%= current_account.balance %>
-
-  playerInstance.setup({
-      autostart: "true",
-      file: url
-  });
-
-  // Embed JWplayer
-
-  jwplayer().on('ready', function() {
-    $(".jw-spacer").after($(".minutes-balance"));
-    $(".minutes-balance").show();
-
-  });
-
-  jwplayer().on('viewable', function() {
-    $(".video-info-container").show();
-  });
-
-  //inaccurate timekeeping
-
-  var counter = 0;
-  var prevPosition = 0;
-
-  jwplayer().on('time', function(time) {
-    counter += time.position - prevPosition;
-    prevPosition = time.position;
-    if (counter > playDuration) {
-      sendPlay();
-      counter -= playDuration;
-    }
-  });
-
-  jwplayer().on('seeked', function() {
-    counter = 0;
-  })
-
-  //post to server
-
-  function sendPlay() {
-    var playData = { play: {video_id: videoId, duration: playDuration} }
-    var request = $.ajax({
-      url: "/plays",
-      method: "POST",
-      data: playData,
-      dataType: "html"
-    });
-    console.log(request);
-
-    request.done(function( msg ) {
-      updateBalance();
-    });
-  }
-
-  function updateBalance () {
-    balance -= playDuration;
-    $("#balance")[0].innerHTML = Math.floor(balance/60);
-  }
-  
-  
-</script>
 
 
