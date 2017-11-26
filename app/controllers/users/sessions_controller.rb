@@ -16,6 +16,14 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def present
+    if user_signed_in?
+      render json: { "logged_in" => "true" }
+    else
+      render json: { "logged_in" => "false"}
+    end
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

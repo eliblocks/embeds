@@ -50,6 +50,7 @@ gem 'paypal-sdk-rest'
 gem 'sendgrid-ruby'
 gem 'algoliasearch-rails'
 gem 'ahoy_matey'
+gem 'rack-cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

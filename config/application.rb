@@ -16,6 +16,13 @@ module Embeds
       'X-Frame-Options' => 'ALLOWALL'
     }
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '/users/sessions/present', :headers => :any, :methods => [:get]
+      end
+    end
+
     config.default_image = "v1507935825/skgchx7hxw1huoodm8y5.jpg"
     config.default_profile_image = "v1508457686/default_profile_gmtwcg.png"
     config.rate = 6000

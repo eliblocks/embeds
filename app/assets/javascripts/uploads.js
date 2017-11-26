@@ -8,6 +8,7 @@ $(document).on("turbolinks:load", function() {
     add: function(e, data) {
       console.log("add", data);
 
+
       getFileDuration(data);
 
       data.progressBar = buildFileRow(data);
@@ -19,7 +20,8 @@ $(document).on("turbolinks:load", function() {
         _: Date.now() // prevent caching
       };
 
-      getFileHex(data, options, logResult)   
+      ahoy.track("uploadAdd", { file: data.files[0].name });
+      getFileHex(data, options, logResult);
     },
 
     progress: function(e, data) {
@@ -126,6 +128,7 @@ $(document).on("turbolinks:load", function() {
     data.progressBar.parent().addClass("list-group-item-danger");
     $(".file_type_alert").html("Only mp4 is allowed");
     $(".file_type_alert").addClass("alert alert-danger");
+    ahoy.track("uploadFail", { file: data.files[0].name });
   }
 
 });

@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
 
-
   resources :users
   resources :charges
 
@@ -47,6 +46,7 @@ Rails.application.routes.draw do
   get 'thank_you', to: 'embeds#thank_you'
   get 'stats', to: 'static#stats'
 
+
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :users
@@ -56,6 +56,12 @@ Rails.application.routes.draw do
       end
     end
     get 'sessions/:id', to: 'sessions#impersonate', as: "impersonate"
+  end
+
+  devise_scope :user do
+      namespace :users do
+        get 'sessions/present', to: "sessions#present"
+      end
   end
 
 
