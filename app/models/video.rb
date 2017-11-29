@@ -6,6 +6,8 @@ class Video < ApplicationRecord
   has_many :plays
 
   scope :approved, -> { where(approved: true) }
+  scope :unremoved, -> { where(removed: false) }
+  scope :listed, -> { where(public: true) }
 
   algoliasearch per_environment: true do
     attribute :title, :views
@@ -55,6 +57,10 @@ class Video < ApplicationRecord
     }
   end
 
+  def remove
+    update(removed: true)
+  end
+
   def update_views(play)
     new_views = views + play.duration
     update(views: new_views)
@@ -93,12 +99,10 @@ class Video < ApplicationRecord
     end
   end
 
-  def removable?
-    !plays.any?
-  end
-
   def seconds_played
     plays.sum(:duration) || 0
   end
+
+
 
 end

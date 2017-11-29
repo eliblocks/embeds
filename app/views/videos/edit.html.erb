@@ -52,15 +52,11 @@
 <% end %>
 <hr>
 
-<% if @video.removable? %>
-  <%= link_to "Delete Video", video_path(@video), method: :delete, class: "btn btn-danger" %>
-<% else %>
-  <% if !@video.removed %>
-    <%= link_to "Remove Video", remove_video_path(@video), method: :patch, class: "btn btn-danger" %>
-  <% else %>
-    <%= link_to "Restore", restore_video_path, method: :patch, class: "btn btn-success" %>
-  <% end %>
-<% end %>
+<%= link_to "Delete Video", 
+    video_path(@video), 
+    method: :delete, 
+    class: "btn btn-danger", 
+    data: {confirm: "Are you sure?"} %>
 
 <%= cloudinary_js_config %>
 

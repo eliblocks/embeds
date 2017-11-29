@@ -1,7 +1,7 @@
 <% provide(:title, "Library") %>
 <div class="row">
   <div class="col">
-    <% if current_user.videos.any? %>
+    <% if @videos %>
       <table class="table library-table">
         <thead>
           <tr>
@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.videos.order(created_at: :desc).each do |video| %>
+          <% @videos.order(created_at: :desc).each do |video| %>
             <tr onclick="window.location = '<%= edit_video_path(video) %>' ">
               <td><%= video.title %></td>
               <td><%= youtube_time(video.duration) %></td>

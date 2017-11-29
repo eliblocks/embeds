@@ -1,7 +1,11 @@
 class Admin::VideosController < Admin::AdminController
 
   def index
-    @videos = Video.all.order(:views)
+    if params[:show_removed]
+      @videos = Video.all.order(views: :desc)
+    else
+      @videos = Video.unremoved.order(views: :desc)
+    end
   end
 
   def toggle_approval

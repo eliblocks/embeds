@@ -6,8 +6,8 @@ class VideosController < ApplicationController
   # GET /videos.json
   def index
     @videos = Video.approved
-    .where.not(removed: true)
-    .where(public: true)
+    .unremoved
+    .listed
     .includes(:user)
     .order(created_at: :desc)
     .page(params[:page])
@@ -18,7 +18,7 @@ class VideosController < ApplicationController
   # GET /videos/1.json
   def show
     if @video.removed
-      raise ActionController::RoutingError.new('Not Found')
+      render 'embeds/unavailable'
     end
     if current_account.balance < @video.duration
       flash[:notice] = "Not enough minutes to view that video."
@@ -72,17 +72,10 @@ class VideosController < ApplicationController
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
-    if @video.destroy
+    if @video.plays.any?
+      @video.remove
+    elsif @video.destroy
       flash[:success] = 'Video successfully destroyed.'
-      redirect_to library_path
-    else
-      render 'edit'
-    end
-  end
-
-  def remove
-    if @video.update(removed: true)
-      flash[:success] = "Video successfully removed"
       redirect_to library_path
     else
       render 'edit'
@@ -101,8 +94,8 @@ class VideosController < ApplicationController
   def search
     @videos = Video.search(params[:q])
       .approved
-      .where(public: true)
-      .where.not(removed: true)
+      .listed
+      .unremoved
       .includes(:user)
       .order(:created_at)
       .page(params[:page])
