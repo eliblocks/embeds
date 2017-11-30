@@ -102,7 +102,4 @@ class Video < ApplicationRecord
   def seconds_played
     plays.sum(:duration) || 0
   end
-
-
-
 end
