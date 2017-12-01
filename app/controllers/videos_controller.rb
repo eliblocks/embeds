@@ -92,12 +92,11 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.search(params[:q])
-      .approved
+    @videos = Video.approved
       .listed
       .unremoved
       .includes(:user)
-      .order(:created_at)
+      .search(params[:q])
       .page(params[:page])
       .per(12)
     render 'index'
