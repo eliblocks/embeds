@@ -5,14 +5,12 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.approved
-    .unremoved
-    .listed
+    @videos = Video.featured
     .includes(:user)
     .order(created_at: :desc)
     .page(params[:page])
     .per(12)
-  end
+   end
 
   # GET /videos/1
   # GET /videos/1.json

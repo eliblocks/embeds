@@ -8,10 +8,13 @@
       <th>Title</th>
       <th>User</th>
       <th>Duration</th>
-      <th>Approved</th>
       <th>Balance</th>
       <th>Views</th>
-      <th>Removed</th>
+      <th>Approved</th>
+      <th>Featured</th>
+      <% if params[:show_removed] %>
+        <th>Removed</th>
+      <% end %>
       
       <th colspan="3"></th>
     </tr>
@@ -23,15 +26,13 @@
         <td><%= video.title %></td>
         <td><%= video.user.full_name %></td>
         <td><%= video.duration %></td>
-        <td><%= video.approved %></td>
         <td><%= video.balance %></td>
         <td><%= video.views %></td>
-        <td><%= video.removed %></td>
-        <td>
-          <%= button_to toggle_approval_admin_video_path(video), method: :patch, class: "btn btn-primary" do %>
-            <%= video.approved? ? "Unapprove" : "Approve" %>
-          <% end %>
-        </td>
+        <td><%= link_to video.approved.to_s, toggle_approval_admin_video_path(video), method: :patch %></td>
+        <td><%= link_to video.featured.to_s, toggle_featured_admin_video_path(video), method: :patch %></td>
+        <% if params[:show_removed] %>
+          <td><%= video.removed %></td>
+        <% end %>
         <td><%= link_to "Download", video.clip.url %></td>
         <td><%= link_to 'Show', video, 'data-turbolinks' => 'false' %></td>
         <td><%= link_to 'Edit', edit_video_path(video) %></td>

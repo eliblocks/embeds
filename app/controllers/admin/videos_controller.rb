@@ -17,4 +17,15 @@ class Admin::VideosController < Admin::AdminController
     end
     redirect_to admin_videos_path
   end
+
+  def toggle_featured
+    @video = Video.find(params[:id])
+    if @video.featured?
+      @video.update(featured: false)
+    else
+      @video.update(featured: true)
+    end
+    redirect_to admin_videos_path
+  end
+
 end

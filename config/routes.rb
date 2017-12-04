@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resources :videos do
       member do
         patch 'toggle_approval'
+        patch 'toggle_featured'
       end
     end
     get 'sessions/:id', to: 'sessions#impersonate', as: "impersonate"

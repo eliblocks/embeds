@@ -8,6 +8,7 @@ class Video < ApplicationRecord
   scope :approved, -> { where(approved: true) }
   scope :unremoved, -> { where(removed: false) }
   scope :listed, -> { where(public: true) }
+  scope :featured, -> { where(featured: true) }
 
   algoliasearch per_environment: true do
     attribute :title, :views
