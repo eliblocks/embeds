@@ -5,13 +5,14 @@
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Title</th>
       <th>User</th>
       <th>Duration</th>
-      <th>Balance</th>
       <th>Views</th>
       <th>Approved</th>
       <th>Featured</th>
+      <th>Suspended</th>
       <% if params[:show_removed] %>
         <th>Removed</th>
       <% end %>
@@ -23,13 +24,14 @@
   <tbody>
     <% @videos.each do |video| %>
       <tr>
+        <td><%= video.id %></td>
         <td><%= video.title %></td>
         <td><%= video.user.full_name %></td>
         <td><%= video.duration %></td>
-        <td><%= video.balance %></td>
         <td><%= video.views %></td>
         <td><%= link_to video.approved.to_s, toggle_approval_admin_video_path(video), method: :patch %></td>
         <td><%= link_to video.featured.to_s, toggle_featured_admin_video_path(video), method: :patch %></td>
+        <td><%= link_to video.suspended.to_s, toggle_suspended_admin_video_path(video), method: :patch %></td>
         <% if params[:show_removed] %>
           <td><%= video.removed %></td>
         <% end %>

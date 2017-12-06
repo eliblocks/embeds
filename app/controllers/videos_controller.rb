@@ -15,7 +15,7 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
-    if @video.removed
+    if @video.removed || @video.suspended
       render 'embeds/unavailable'
     end
     if current_account.balance < @video.duration
@@ -33,6 +33,9 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def edit
+    unless current_user == @video.user || current_user.admin?
+      redirect_to root_url
+    end
   end
 
   # POST /videos

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       member do
         patch 'toggle_approval'
         patch 'toggle_featured'
+        patch 'toggle_suspended'
       end
     end
     get 'sessions/:id', to: 'sessions#impersonate', as: "impersonate"
