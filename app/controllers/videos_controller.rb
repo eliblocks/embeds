@@ -10,7 +10,7 @@ class VideosController < ApplicationController
     .order(created_at: :desc)
     .page(params[:page])
     .per(12)
-   end
+  end
 
   # GET /videos/1
   # GET /videos/1.json
@@ -75,6 +75,8 @@ class VideosController < ApplicationController
   def destroy
     if @video.plays.any?
       @video.remove
+      flash[:success] = 'Video successfully removed.'
+      redirect_to library_path
     elsif @video.destroy
       flash[:success] = 'Video successfully destroyed.'
       redirect_to library_path
@@ -93,13 +95,14 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.approved
-      .listed
-      .unremoved
-      .includes(:user)
-      .search(params[:q])
-      .page(params[:page])
-      .per(12)
+    @videos = Video
+    .approved
+    .ransack(title_cont: params[:q])
+    .result
+    .order(views: :desc)
+    .page(params[:page])
+    .per(4)
+
     render 'index'
   end
 

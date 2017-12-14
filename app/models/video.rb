@@ -59,7 +59,7 @@ class Video < ApplicationRecord
   end
 
   def remove
-    update(removed: true)
+    update(removed: true, approved: false)
   end
 
   def update_views(play)
