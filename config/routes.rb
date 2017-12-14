@@ -2,16 +2,16 @@ Rails.application.routes.draw do
   mount ClipUploader.upload_endpoint(:cache) => "/clips/upload"
   mount Shrine.presign_endpoint(:cache) => "/clips/presign"
 
+  # root to: 'static#welcome', constraints:
+  #   lambda { |request| request.env['warden'].user == nil }
 
-  root to: 'static#welcome', constraints:
-    lambda { |request| request.env['warden'].user == nil }
+  # root to: 'accounts#usage', constraints:
+  #   lambda { |request| request.env['warden'].user.viewer? }
 
-  root to: 'accounts#usage', constraints:
-    lambda { |request| request.env['warden'].user.viewer? }
+  # root to: 'accounts#dashboard', constraints:
+  #   lambda { |request| request.env['warden'].user.uploader? }
 
-  root to: 'accounts#dashboard', constraints:
-    lambda { |request| request.env['warden'].user.uploader? }
-
+  root to: 'videos#index'
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
 
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       patch 'restore'
     end
   end
+
   resources :plays
   resources :embeds
 
@@ -46,9 +47,12 @@ Rails.application.routes.draw do
   get 'thank_you', to: 'embeds#thank_you'
   get 'stats', to: 'static#stats'
 
+  get 'sessions/impersonate', to: 'sessions#impersonate'
+
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
+
     resources :users
     resources :videos do
       member do

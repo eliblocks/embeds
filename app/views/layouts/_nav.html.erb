@@ -18,19 +18,23 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item">
+          <%#= nav_link("Videos", videos_path) %>
+        </li> -->
+        
         <li class="nav-item">
-          <%= nav_link("Videos", videos_path) %>
+          <%= nav_link "Buy Minutes", new_charge_path %>
         </li>
         <li class="nav-item">
           <%= nav_link "Upload", new_video_path %>
         </li>
-        <li class="nav-item">
-          <%= nav_link "Library", library_path %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Buy Minutes", new_charge_path %>
-        </li>
+        <% if current_user.videos.any? %>
+          <li class="nav-item">
+            <%= nav_link "Library", library_path %>
+          </li>
+        <% end %>
       </ul>
+
       
       <div class="navbar-nav ml-auto">
         <%= form_tag("/search", method: :get, class: "form-inline my-2 my-lg-0") do %>
@@ -51,7 +55,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right nav-item" aria-labelledby="dropdownMenuButton">
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item" if current_user.videos.any? %>
-            <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" if current_user.uploader? %>
+            <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" if current_user.videos.any? %>
             <%= link_to "Usage", usage_path, class: "dropdown-item" %>
             <%= link_to "Account", account_path, class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
@@ -67,11 +71,11 @@
         <%= image_tag "browzable_logo_black.png", width: 130, height: 32, class: "mb-1 br-logo" %>
       <% end %>
 
-    <ul class="navbar-nav">
+    <!-- <ul class="navbar-nav">
       <li class="nav-item">
-        <%= link_to "Videos", videos_path, class: "nav-link" %>
+        <%#= link_to "Videos", videos_path, class: "nav-link" %>
       </li>
-    </ul>
+    </ul> -->
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">

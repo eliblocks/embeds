@@ -11,9 +11,9 @@ class Admin::VideosController < Admin::AdminController
   def toggle_approval
     @video = Video.find(params[:id])
     if @video.approved
-      @video.update(approved: false)
+      @video.update(approved: false, featured: false)
     else
-      @video.update(approved: true)
+      @video.update(approved: true, suspended: false)
     end
     redirect_to admin_videos_path
   end
@@ -23,7 +23,7 @@ class Admin::VideosController < Admin::AdminController
     if @video.featured
       @video.update(featured: false)
     else
-      @video.update(featured: true)
+      @video.update(featured: true, approved: true, suspended: false)
     end
     redirect_to admin_videos_path
   end
@@ -33,7 +33,7 @@ class Admin::VideosController < Admin::AdminController
     if @video.suspended
       @video.update(suspended: false)
     else
-      @video.update(suspended: true)
+      @video.update(suspended: true, approved: false, featured: false)
     end
     redirect_to admin_videos_path
   end
