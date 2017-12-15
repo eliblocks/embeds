@@ -25,9 +25,9 @@
         <li class="nav-item">
           <%= nav_link "Buy Minutes", new_charge_path %>
         </li>
-        <li class="nav-item">
-          <%= nav_link "Upload", new_video_path %>
-        </li>
+        <!-- <li class="nav-item">
+          # nav_link "Upload", new_video_path %>
+        </li> -->
         <% if current_user.videos.any? %>
           <li class="nav-item">
             <%= nav_link "Library", library_path %>
