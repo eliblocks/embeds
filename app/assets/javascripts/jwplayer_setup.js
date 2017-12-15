@@ -68,6 +68,9 @@ $(document).on("turbolinks:load", function() {
 
   function updateBalance () {
     balance -= playDuration;
+    if (balance < 10) {
+      window.location.href = "/charges/new";
+    }
     $("#balance")[0].innerHTML = Math.floor(balance/60);
   }
 });

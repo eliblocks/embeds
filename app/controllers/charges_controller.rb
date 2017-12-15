@@ -2,6 +2,9 @@ class ChargesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def new
+    if current_account.balance < 10
+      flash.now[:notice] = "You're out of minutes! Buy more to keep watching"
+    end
     @charge = Charge.new
     @client_token = Braintree::ClientToken.generate
     result = attempt_sale(@amount, params[:nonce])

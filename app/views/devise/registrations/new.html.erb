@@ -2,13 +2,9 @@
 <br>
 <div class="row">
   <div class="col-md-6 m-auto">
-
-      <h2 class="text-center">Sign up</h2><br>
-
-
+    <h4 class="text-center">Sign up and get 100 free minutes. No credit card!</h4><br>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
-
 
       <div class="form-group">
         <%= f.label :full_name %>
@@ -47,6 +43,7 @@
       <%= f.submit "Sign up", class: "btn btn-primary", id: "signup", onclick: "gtag_report_conversion" %>
 
     <% end %>
+    <br>
     <%= render "devise/shared/links" %>
   </div>
 </div>

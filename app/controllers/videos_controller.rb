@@ -18,8 +18,8 @@ class VideosController < ApplicationController
     if @video.removed || @video.suspended
       render 'embeds/unavailable'
     end
-    if current_account.balance < @video.duration
-      flash[:notice] = "Not enough minutes to view that video."
+    if current_account.balance < 10
+      flash[:notice] = "You're out of minutes! Buy more to keep watching"
       session[:video_id] = @video.id
       session[:ref] = 'site'
       redirect_to new_charge_path()
@@ -110,6 +110,7 @@ class VideosController < ApplicationController
 
     def redirect_to_sign_up
       unless user_signed_in?
+        flash[:notice] = "Sign up or log in to watch"
         redirect_to new_user_session_path
       end
     end
