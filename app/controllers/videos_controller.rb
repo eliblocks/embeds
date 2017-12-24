@@ -96,13 +96,7 @@ class VideosController < ApplicationController
 
   def search
     @videos = Video
-    .approved
-    .ransack(title_cont: params[:q])
-    .result
-    .order(views: :desc)
-    .page(params[:page])
-    .per(4)
-
+    .search(params[:q], page: params[:page])
     render 'index'
   end
 

@@ -21,4 +21,5 @@
 //= require jquery-fileupload/jquery.fileupload
 //= require cloudinary
 //= require ahoy
+//= require activestorage
 //= require_tree .

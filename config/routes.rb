@@ -69,8 +69,4 @@ Rails.application.routes.draw do
         get 'sessions/present', to: "sessions#present"
       end
   end
-
-
-
-
 end

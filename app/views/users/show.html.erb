@@ -82,7 +82,7 @@
         var id = data.result.public_id;
         var format = data.result.format;
         var version = data.result.version;
-        var url = "http://res.cloudinary.com/eli/image/upload/w_150,h_150,c_fill,g_auto,r_max/v" + version + "/" + id + "." + format;
+        var url = "https://res.cloudinary.com/eli/image/upload/w_150,h_150,c_fill,g_auto,r_max/v" + version + "/" + id + "." + format;
         $(".profile-pic img").attr("src", url);
         $(".loader").hide();
         $(".profile-save").show();

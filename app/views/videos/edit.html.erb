@@ -15,7 +15,7 @@
         </div>
         <div class="preview-loader"></div>
         <div class="mt-2">
-          <label for="preview-upload" class="btn btn-secondary">Change preview</label>
+          <label for="preview-upload" class="btn btn-secondary">Change preview</label>   
           <%= cl_image_upload_tag(:image_id, aria_hidden: true) %>
         </div>
     </div>
@@ -98,7 +98,7 @@
         var id = data.result.public_id;
         var format = data.result.format;
         var version = data.result.version;
-        var url = "http://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
+        var url = "https://res.cloudinary.com/eli/image/upload/w_200/v" + version + "/" + id + "." + format;
         $(".preview-image").attr("src", url);
         $(".loader").hide();
         console.log(id, format, version, url);

@@ -19,7 +19,7 @@ class Account < ApplicationRecord
   end
 
   def self.cl_base_url
-    "http://res.cloudinary.com/eli/image/upload"
+    "https://res.cloudinary.com/eli/image/upload"
   end
 
   def image_url

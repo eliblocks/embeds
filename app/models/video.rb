@@ -13,7 +13,7 @@ class Video < ApplicationRecord
   algoliasearch per_environment: true do
     attribute :title, :views
     searchableAttributes ['title']
-    hitsPerPage 12
+    hitsPerPage 4
     customRanking ['desc(views)']
   end
 
@@ -76,7 +76,7 @@ class Video < ApplicationRecord
   end
 
   def self.cl_base_url
-    "http://res.cloudinary.com/eli/image/upload"
+    "https://res.cloudinary.com/eli/image/upload"
   end
 
   def image_url
