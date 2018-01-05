@@ -6,6 +6,7 @@ Rails.application.config.content_security_policy do |p|
   p.default_src :self, :https, :unsafe_inline
   p.font_src    :self, :https, :data
   p.img_src     :self, :http, :https, :data
+  p.media_src   :self, :blob, :http, :https, :data
   p.object_src  :none
   p.script_src  :self, '*.jwpcdn.com', '*.gstatic.com', :https, :unsafe_inline
   p.style_src   :self, :https, :unsafe_inline

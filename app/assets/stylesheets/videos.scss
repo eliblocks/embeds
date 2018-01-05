@@ -139,10 +139,22 @@
   img {
     width: 100%;
   }
+  margin-bottom: 5px;
 }
 
 .movies-row {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.movie-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: '';
+  margin-bottom: 5px;
+  padding: 0;
+  font-size: 0.8em;
+  color: #006400;
+  font-weight: bold;
 }
 

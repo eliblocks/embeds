@@ -1,23 +1,29 @@
 <% provide(:title, @video.title) %>
 <div class="row">
-  <div class="col-lg-10 m-auto">
+  <div class="col-12">
     <p id="notice"><%= notice %></p>
     <%= render 'shared/player' %>
     <div class="video-info-container">
-        <h4><%= @video.title %></h4>
-        <span><%= @video.minutes %> Views</span> | <span><%= time_ago_in_words(@video.created_at) %> ago</span>
-        <button type="button" class="btn btn-secondary share-link" data-toggle="modal" data-target="#iframe-modal">Share</button>
-        <hr>
+      <!-- <h4><%= @video.title %></h4>
+      <span><%= @video.minutes %> Views</span> | <span><%= time_ago_in_words(@video.created_at) %> ago</span>
+      <button type="button" class="btn btn-secondary share-link" data-toggle="modal" data-target="#iframe-modal">Share</button>
+      <hr>
       <div class="user-info">
-       <%= cl_image_tag @video.user.account.image, client_hints: true, transformation: [ 
+       <%#= cl_image_tag @video.user.account.image, client_hints: true, transformation: [ 
                           { gravity: "auto", width: "50", height: "50", radius: "max", crop: "fill" }] %>
-        <%= link_to @video.user.full_name, user_path(@video.user), class: "uploader-link" %>
-      </div>
+        <%#= link_to @video.user.full_name, user_path(@video.user), class: "uploader-link" %>
+      </div> 
+    </div> -->
+  </div>
+  <div class="row movie-info-container">
+    <div class="col-md-8">
+      <h4 class="mt-2"><%= @video.title %></h4>
+      <p class="movie-description mt-4"><%= @video.description %></p>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="iframe-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="iframe-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -34,7 +40,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

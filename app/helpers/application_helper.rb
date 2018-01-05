@@ -41,6 +41,4 @@ module ApplicationHelper
     content_tag(:meta, "", name:'description', content: description)
   end
 
-
-
 end
