@@ -41,4 +41,16 @@ module ApplicationHelper
     content_tag(:meta, "", name:'description', content: description)
   end
 
+  def popover(video)
+    video.description.empty? ? '' : popover_content(video)
+  end
+
+  def popover_content(video)
+    <<~HEREDOC
+      <h2 class="popover-title">#{video.title}</h2>
+      <span>R | #{video.runtime} | #{video.language}
+      <hr>
+      <p class="popover-description">#{video.description}</p>
+    HEREDOC
+  end
 end

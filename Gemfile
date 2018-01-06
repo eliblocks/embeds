@@ -52,6 +52,8 @@ gem 'algoliasearch-rails'
 gem 'ahoy_matey'
 gem 'rack-cors'
 gem 'bootsnap'
+gem 'omdbapi'
+gem 'themoviedb'
 # gem 'ransack'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -9,6 +9,7 @@ class Video < ApplicationRecord
   scope :unremoved, -> { where(removed: false) }
   scope :listed, -> { where(public: true) }
   scope :featured, -> { where(featured: true) }
+  scope :movies, -> { where.not(imdb_id: nil)}
 
   algoliasearch per_environment: true do
     attribute :title, :views
@@ -59,7 +60,11 @@ class Video < ApplicationRecord
   end
 
   def remove
-    update(removed: true, approved: false)
+    update(removed: true, approved: false, featured: false)
+  end
+
+  def remove_or_destroy
+    plays.any? ? remove : destroy
   end
 
   def update_views(play)

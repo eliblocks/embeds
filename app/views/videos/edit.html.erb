@@ -9,9 +9,9 @@
           <div id="browzable-video"></div>
       <% end %>
     </div>
-    <div class="form-group preview-group col-md-5">
+    <div class="form-group preview-group col-md-5 ml-5">
         <div class="profile-pic">
-          <%= cl_image_tag(@video.image, width: 200, class: "preview-image") %>
+          <%= cl_image_tag(@video.image, width: 175, class: "preview-image") %>
         </div>
         <div class="preview-loader"></div>
         <div class="mt-2">
@@ -28,6 +28,9 @@
       <div class="form-group">
         <%= form.text_area :description, class: "form-control", placeholder: "Description" %>
       </div>
+      <div class="form-group">
+        <%= form.text_field :imdb_id, class: "form-control", placeholder: "IMDB ID" %>
+      </div>
       <div class="form-check form-check-inline">
         <%= form.label :public, "show", class: "form-check-label" do %>
           <%= form.radio_button :public, true, class: "form-check-input" %> Public
@@ -42,7 +45,7 @@
         <%= form.submit "Update", class: "btn btn-primary" %>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 ml-5">
       <div class="embed-code-container bg-light">
         <h5>Embed Code</h5>
         &lt;iframe width="560" height="315" src="https://www.browzable.com/embeds/<%= @video.id %>" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
