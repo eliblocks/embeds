@@ -17,50 +17,42 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <!-- <li class="nav-item">
-          <%#= nav_link("Videos", videos_path) %>
-        </li> -->
-        
-        <li class="nav-item">
-          <%= nav_link "Buy Minutes", new_charge_path %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Upload", new_video_path if current_user.videos.any?%>
-        </li>
-        <% if current_user.videos.any? %>
-          <li class="nav-item">
-            <%= nav_link "Library", library_path %>
-          </li>
-        <% end %>
-      </ul>
       
-      <div class="navbar-nav ml-auto">
+      <div class="navbar-nav ml-5">
         <%= form_tag("/search", method: :get, class: "form-inline my-2 my-lg-0") do %>
           <div class="input-group search-group">
             <%= text_field_tag(:q, "", class: "search-control form-control", 
-                                placeholder: params[:q] || "Search videos", id: "search-input") %>
+                                placeholder: params[:q], id: "search-input") %>
             <span class="input-group-btn">
               <button type="submit" class="btn btn-secondary"><%= fa_icon "search" %></button>
             </span>
           </div>
         <% end %>
       </div>
-      <ul class="navbar-nav">
-        <%#= link_to "Buy minutes", new_charge_path, class: "btn btn-secondary btn-square my-2 my-lg-0" %>
-        <li class="nav-item dropdown">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="buttton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Account
           </a>
           <div class="dropdown-menu dropdown-menu-right nav-item" aria-labelledby="dropdownMenuButton">
-            <%= link_to "Profile", user_path(current_user), class: "dropdown-item" if current_user.videos.any? %>
-            <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" if current_user.videos.any? %>
+            <%#= link_to "Profile", user_path(current_user), class: "dropdown-item" if current_user.videos.any? %>
+            <%#= link_to "Dashboard", dashboard_path, class: "dropdown-item" if current_user.videos.any? %>
             <%#= link_to "Usage", usage_path, class: "dropdown-item" %>
-            <%= link_to "Account", account_path, class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <%#= link_to "Account", account_path, class: "dropdown-item" %>
+            <%#= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
-        </div>
-      </div>
+        </div> -->
+        <li class="nav-item">
+          <%= nav_link "Buy Minutes", new_charge_path %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Account", account_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        
+      </ul>
     </div>
   </nav>
 
@@ -78,11 +70,20 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <%= link_to "Sign up", new_user_registration_path, class: "nav-link pr-3" %>
+        <a href="#" class="nav-link pr-3 auth-link">Sign up</a>
+        <%#= link_to "Sign up", new_user_registration_path, class: "nav-link pr-3 auth-link", id: "signup" %>
       </li>
       <li class="nav-item">
-        <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+        <a href="#" class="nav-link auth-link">Log in</a>
+        <%#= link_to "Log in", new_user_session_path, class: "nav-link auth-link" %>
       </li>
     </ul>
   </nav>
 <% end %>
+
+<script>
+  $(".auth-link").click(function(e) {
+    e.preventDefault();
+    $("#login-modal").modal();
+  });
+</script>

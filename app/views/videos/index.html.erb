@@ -35,15 +35,32 @@
   </div>
 </div>
 
+
+
+<% unless user_signed_in? %>
+  <script>
+    $(".br-card-img-link").click(function(e) {
+      e.preventDefault();
+      $('#login-modal').modal();
+    });
+  </script>
+<% end %>
+
 <script>
-  $(function () {
+  document.addEventListener("turbolinks:before-cache", function() {
+    $('[data-toggle="popover"]').popover('dispose');
+  })
+ 
+
+  $(document).on('turbolinks:load', function() {
     $('[data-toggle="popover"]').popover({ 
       trigger: 'hover', 
       delay: { "show": 750, "hide": 100 },
       html: true,
       container: 'body'
     });
-  })
+
+  });
 </script>
 
 
