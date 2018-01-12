@@ -5,7 +5,6 @@ module ApplicationHelper
   end
 
   def youtube_time(seconds)
-
     hours = 0
     minutes = 0
     while seconds >= 3600
@@ -48,7 +47,8 @@ module ApplicationHelper
   def popover_content(video)
     <<~HEREDOC
       <h2 class="popover-title">#{video.title}</h2>
-      <span>R | #{video.runtime} | #{video.language}
+      <span>#{video.rating || "R"} | #{video.runtime || ''} min | #{video.published_at.year if video.published_at} <br>
+      #{video.tag_list}
       <hr>
       <p class="popover-description">#{video.description}</p>
     HEREDOC

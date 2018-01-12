@@ -38,6 +38,7 @@ gem 'kaminari'
 gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-elastictranscoder'
 gem 'aws-sdk-cloudfront'
+gem 'aws-sdk-mediaconvert'
 gem 'shrine'
 gem 'sucker_punch' #remove
 gem 'jquery-fileupload-rails'

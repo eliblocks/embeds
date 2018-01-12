@@ -15,6 +15,9 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
+    # cookies['Cloudfront-Policy'] = encoded_policy
+    # cookies['CloudFront-Key-Pair-Id'] = ENV['CLOUDFRONT_KEY_ID']
+    # cookies['CloudFront-Signature'] = signed_cookie
     if @video.removed || @video.suspended
       render 'embeds/unavailable'
     end
@@ -101,6 +104,32 @@ class VideosController < ApplicationController
   end
 
   private
+
+    def signed_cookie
+      signer = Aws::CloudFront::CookieSigner.new(
+        key_pair_id: ENV["CLOUDFRONT_KEY_ID"],
+        private_key: ENV["CLOUDFRONT_PRIVATE_KEY"]
+      )
+      url = "http://d3uaj0e12xnx41.cloudfront.net"
+      cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
+    end
+
+    def cookie_policy
+      {
+        "Statement": [
+          {
+            "Resource":"http://d3uaj0e12xnx41.cloudfront.net/*",
+            "Condition":{
+              "DateLessThan":{"AWS:EpochTime" => 1.days.from_now.to_i}
+            }
+          }
+        ]
+      }
+    end
+
+    def encoded_policy
+      Base64.encode64(cookie_policy.to_json)
+    end
 
     def redirect_to_sign_up
       unless user_signed_in?
