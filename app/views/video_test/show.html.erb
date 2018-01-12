@@ -1,9 +1,8 @@
 <p>Title: <%= @video.title %></p>
 <p>Created: <%= @video.created_at %></p>
 <p>Uploader: <%= @video.user.full_name %></p>
-<p>S3 URL: <%= @video.clip.url %></p>
 
-<%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.clip.url, video_id: @video.id } do %>
+<%= content_tag :div, "", class: "browzable-wrapper", data: { url: @video.signed_cloudfront_url, video_id: @video.id } do %>
   <div id="browzable-video"></div>
 <% end %>
 
