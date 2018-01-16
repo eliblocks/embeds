@@ -15,9 +15,7 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
-    # cookies['Cloudfront-Policy'] = encoded_policy
-    # cookies['CloudFront-Key-Pair-Id'] = ENV['CLOUDFRONT_KEY_ID']
-    # cookies['CloudFront-Signature'] = signed_cookie
+    set_cloudfront_cookies
     if @video.removed || @video.suspended
       render 'embeds/unavailable'
     end
@@ -105,20 +103,25 @@ class VideosController < ApplicationController
 
   private
 
-    def signed_cookie
+    def set_cloudfront_cookies
       signer = Aws::CloudFront::CookieSigner.new(
         key_pair_id: ENV["CLOUDFRONT_KEY_ID"],
         private_key: ENV["CLOUDFRONT_PRIVATE_KEY"]
       )
-      url = "http://d3uaj0e12xnx41.cloudfront.net"
-      cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
+      url = "https://media.browzable.com/*"
+
+      cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
+      cookies['CloudFront-Policy'] = cloudfront_cookies['CloudFront-Policy']
+      cookies['CloudFront-Key-Pair-Id'] = cloudfront_cookies['CloudFront-Key-Pair-Id']
+      cookies['CloudFront-Signature'] = cloudfront_cookies['CloudFront-Signature']
+      puts "cookies: #{cookies['Cloudfront-Policy']}"
     end
 
     def cookie_policy
       {
         "Statement": [
           {
-            "Resource":"http://d3uaj0e12xnx41.cloudfront.net/*",
+            "Resource":"https://media.browzable.com/*",
             "Condition":{
               "DateLessThan":{"AWS:EpochTime" => 1.days.from_now.to_i}
             }

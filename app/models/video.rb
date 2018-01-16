@@ -49,7 +49,7 @@ class Video < ApplicationRecord
 
   def cloudfront_url
     domain_id = ENV["CLOUDFRONT_DOMAIN_ID"]
-    "https://#{domain_id}.cloudfront.net/#{s3_id}"
+    "https://media.browzable.com/#{s3_id}"
   end
 
 
