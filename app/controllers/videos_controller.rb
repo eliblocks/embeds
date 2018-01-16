@@ -111,9 +111,18 @@ class VideosController < ApplicationController
       url = "https://media.browzable.com/*"
 
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
-      cookies['CloudFront-Policy'] = cloudfront_cookies['CloudFront-Policy']
-      cookies['CloudFront-Key-Pair-Id'] = cloudfront_cookies['CloudFront-Key-Pair-Id']
-      cookies['CloudFront-Signature'] = cloudfront_cookies['CloudFront-Signature']
+      cookies['CloudFront-Policy'] = {
+        value: ['CloudFront-Policy'],
+        domain: ['media.browzable.com']
+      }
+      cookies['CloudFront-Key-Pair-Id'] = {
+        value: cloudfront_cookies['CloudFront-Key-Pair-Id'],
+        domain: cloudfront_cookies['media.browzable.com']
+      }
+      cookies['CloudFront-Signature'] = {
+        value: cloudfront_cookies['CloudFront-Signature'],
+        domain: cloudfront_cookies['media.browzable.com']
+      }
       puts "cookies: #{cookies['Cloudfront-Policy']}"
     end
 
