@@ -114,16 +114,13 @@ class VideosController < ApplicationController
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
 
       cookies['CloudFront-Policy'] = {
-        value: cloudfront_cookies['CloudFront-Policy'],
-        domain: domain
+        value: cloudfront_cookies['CloudFront-Policy']
       }
       cookies['CloudFront-Key-Pair-Id'] = {
-        value: cloudfront_cookies['CloudFront-Key-Pair-Id'],
-        domain: domain
+        value: cloudfront_cookies['CloudFront-Key-Pair-Id']
       }
       cookies['CloudFront-Signature'] = {
-        value: cloudfront_cookies['CloudFront-Signature'],
-        domain: domain
+        value: cloudfront_cookies['CloudFront-Signature']
       }
       puts "cookies: #{cookies['Cloudfront-Policy']}"
     end
