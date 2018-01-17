@@ -117,17 +117,17 @@ class VideosController < ApplicationController
       cookies['CloudFront-Policy'] = {
         value: cloudfront_cookies['CloudFront-Policy'],
         domain: domain,
-        expires: 1.hours.from_now
+        expires: 1.days.from_now
       }
       cookies['CloudFront-Key-Pair-Id'] = {
         value: cloudfront_cookies['CloudFront-Key-Pair-Id'],
         domain: domain,
-        expires: 1.hours.from_now
+        expires: 1.days.from_now
       }
       cookies['CloudFront-Signature'] = {
         value: cloudfront_cookies['CloudFront-Signature'],
         domain: domain,
-        expires: 1.hours.from_now
+        expires: 1.days.from_now
       }
     end
 
