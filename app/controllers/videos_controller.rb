@@ -110,7 +110,6 @@ class VideosController < ApplicationController
       )
 
       url = "https://*.browzable.com/*"
-      domain = 'browzable.com'
 
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
 
@@ -128,6 +127,11 @@ class VideosController < ApplicationController
         value: cloudfront_cookies['CloudFront-Signature'],
         domain: :all,
         expires: 1.days.from_now
+      }
+      cookies['Test-One'] = {
+        value: 'something',
+        domain: :all,
+        expires: 1.years.from_now
       }
     end
 
