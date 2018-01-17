@@ -109,7 +109,7 @@ class VideosController < ApplicationController
         private_key: ENV["CLOUDFRONT_PRIVATE_KEY"]
       )
 
-      url = "https://media.browzable.com/*"
+      url = "https://*.browzable.com/*"
       domain = 'browzable.com'
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
 
@@ -131,7 +131,7 @@ class VideosController < ApplicationController
       {
         "Statement": [
           {
-            "Resource":"https://media.browzable.com/*",
+            "Resource":"https://*.browzable.com/*",
             "Condition":{
               "DateLessThan":{"AWS:EpochTime" => 1.days.from_now.to_i}
             }
