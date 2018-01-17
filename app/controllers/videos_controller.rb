@@ -110,20 +110,24 @@ class VideosController < ApplicationController
       )
 
       url = "https://*.browzable.com/*"
-      domain = 'browzable.com'
+      Rails.env == 'development' ? domain = 'localhost' : domain = 'browzable.com'
+
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
 
       cookies['CloudFront-Policy'] = {
         value: cloudfront_cookies['CloudFront-Policy'],
-        domain: domain
+        domain: domain,
+        expires: 1.hours.from_now
       }
       cookies['CloudFront-Key-Pair-Id'] = {
         value: cloudfront_cookies['CloudFront-Key-Pair-Id'],
-        domain: domain
+        domain: domain,
+        expires: 1.hours.from_now
       }
       cookies['CloudFront-Signature'] = {
         value: cloudfront_cookies['CloudFront-Signature'],
-        domain: domain
+        domain: domain,
+        expires: 1.hours.from_now
       }
     end
 
