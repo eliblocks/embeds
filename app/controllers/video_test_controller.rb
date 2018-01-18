@@ -5,28 +5,35 @@ class VideoTestController < ApplicationController
   end
 
   private
-
     def set_cloudfront_cookies
       signer = Aws::CloudFront::CookieSigner.new(
         key_pair_id: ENV["CLOUDFRONT_KEY_ID"],
         private_key: ENV["CLOUDFRONT_PRIVATE_KEY"]
       )
 
-      url = "https://media.browzable.com/*"
-      domain = 'browzable.com'
+      url = "https://*.browzable.com/*"
+
       cloudfront_cookies = signer.signed_cookie(url, policy: cookie_policy.to_json)
 
       cookies['CloudFront-Policy'] = {
         value: cloudfront_cookies['CloudFront-Policy'],
-        domain: domain
+        domain: :all,
+        expires: 1.days.from_now
       }
       cookies['CloudFront-Key-Pair-Id'] = {
         value: cloudfront_cookies['CloudFront-Key-Pair-Id'],
-        domain: domain
+        domain: :all,
+        expires: 1.days.from_now
       }
       cookies['CloudFront-Signature'] = {
         value: cloudfront_cookies['CloudFront-Signature'],
-        domain: domain
+        domain: :all,
+        expires: 1.days.from_now
+      }
+      cookies['Test-One'] = {
+        value: 'something',
+        domain: :all,
+        expires: 1.years.from_now
       }
     end
 

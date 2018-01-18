@@ -8,6 +8,7 @@ Rails.application.config.content_security_policy do |p|
   p.img_src     :self, :http, :https, :data
   p.media_src   :self, :blob, :http, :https, :data
   p.object_src  :none
+  p.connect_src '*'
   p.script_src  :self, '*.jwpcdn.com', '*.gstatic.com', :https, :unsafe_inline, :blob
   p.style_src   :self, :https, :unsafe_inline
 

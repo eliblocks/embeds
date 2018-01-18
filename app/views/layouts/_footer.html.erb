@@ -6,9 +6,12 @@
       <li><%= link_to "Contact", "/contact", class: "footer-link"%></li>
       <li><%= link_to "Privacy", "/privacy", class: "footer-link" %></li>
       <li><%= link_to "Terms", "/terms", class: "footer-link" %></li>
+      <li><%= link_to "Test", "http://terms.localhost:3000/terms", class: "footer-link" %></li>
+
       <% if current_user && current_user.admin? %>
         <li class="float-right"><%= link_to "Admin", "/admin", class: "footer-link" %></li>
       <% end %>
+
     </ul>
   </div>
 </footer>

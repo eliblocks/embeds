@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :plays
   resources :embeds
 
+  resources :blogs, constraints: { subdomain: 'blog' }
+
   get 'about', to: 'static#about'
   get 'contact', to: 'static#contact'
   get 'privacy', to: 'static#privacy'
