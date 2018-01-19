@@ -17,7 +17,10 @@ $(document).on("turbolinks:load", function() {
   
   playerInstance.setup({
     autostart: "true",
-    file: $(".browzable-wrapper").data("url")
+    playlist: [{ 
+      file: $(".browzable-wrapper").data("url"),
+      withCredentials: true
+    }]
   });
 
   jwplayer().on('ready', function() {
