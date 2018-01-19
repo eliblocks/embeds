@@ -5,7 +5,6 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    set_cloudfront_cookies
     @videos = Video.featured
     .includes(:user)
     .order(created_at: :desc)
@@ -16,6 +15,7 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
+    set_cloudfront_cookies
     if @video.removed || @video.suspended
       render 'embeds/unavailable'
     end
