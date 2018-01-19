@@ -1,7 +1,6 @@
 class VideoTestController < ApplicationController
   def show
     @video = Video.find(params[:id])
-    set_cloudfront_cookies
   end
 
   private
