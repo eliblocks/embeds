@@ -18,13 +18,10 @@
   var playDuration = 10;
 
   playerInstance.setup({
-      file: url
-  });
-
-</script>
-
-<script>
-  $.get( "https://blog.browzable.com/blogs", function( data ) {
-    console.log(data);
+    autostart: "true",
+    playlist: [{ 
+      file: $(".browzable-wrapper").data("url"),
+      withCredentials: true
+    }]
   });
 </script>
